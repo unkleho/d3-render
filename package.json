@@ -17,7 +17,9 @@
     "lint": "tsdx lint",
     "prepare": "tsdx build"
   },
-  "peerDependencies": {},
+  "peerDependencies": {
+    "d3": ">=5"
+  },
   "husky": {
     "hooks": {
       "pre-commit": "tsdx lint"
@@ -33,6 +35,8 @@
   "author": "Kaho Cheung",
   "module": "dist/d3-render.esm.js",
   "devDependencies": {
+    "@types/d3": "^5.7.2",
+    "d3": "^5.16.0",
     "husky": "^4.2.5",
     "tsdx": "^0.13.2",
     "tslib": "^1.11.1",
