@@ -38,7 +38,40 @@ render('svg', data);
 $ npm install d3-render d3
 ```
 
-## Render Function
+D3 Render has no dependencies other than D3 version >=5.
+
+## Documentation
+
+### Render
+
+Pretty much one function to rule them all. To use, add this to your JavaScript or TypeScript file:
+
+```js
+import render from 'd3-render';
+
+render(selector, data);
+```
+
+`render` takes two arguments:
+
+#### `selector`
+
+A D3 selector string or node to specify the root element where `render` will run. Works exactly the same as [d3.select](https://github.com/d3/d3-selection#select). Most common usage is with an id or class.
+
+```js
+// Selects first <svg> element
+render('svg', data);
+
+// Select by id
+render('#root', data);
+
+// Select by class
+render('.data-viz', data);
+
+// Select by DOM node
+```
+
+- `data`
 
 selection return
 No external libraries, just D3
@@ -62,6 +95,8 @@ No external libraries, just D3
 ### Selection return example
 
 ### Can be Incrementally adopted
+
+renderSelection
 
 ## Examples
 
