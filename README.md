@@ -2,20 +2,68 @@
 
 > Warning, highly experimental at this stage. API will change.
 
-Declarative and reusable D3. Replace selects, appends, joins, data, transitions and more with one function:
+Declarative and reusable D3. Replace select, append, data joins and more with one function.
+
+More detail in in this article: [Introducing D3 Render: Truly Declarative and Reusable D3](https://observablehq.com/d/919e2f0cb6db41fe).
+
+So what's the difference? Instead of imperative code:
+
+```js
+import * as d3 from 'd3';
+
+// Assume your HTML file has an <svg> element
+const svg = d3.select('svg');
+svg
+  .append('rect')
+  .attr('fill', 'pink')
+  .attr('x', 0)
+  .attr('width', 100)
+  .attr('height', 100);
+```
+
+Write declarative style like this:
 
 ```js
 import render from 'd3-render';
 
-const data = [
-  { as: 'rect', fill: 'pink', x: 0, width: 100, height: 100 }
-];
+const data = [{ as: 'rect', fill: 'pink', x: 0, width: 100, height: 100 }];
 
-// Assume your html file has an <svg> element
+// Assume your HTML file has an <svg> element
 render('svg', data);
 ```
 
-More detail in in this article: [Introducing D3 Render: Truly Declarative and Reusable D3](https://observablehq.com/d/919e2f0cb6db41fe).
+## Getting Started
+
+```bash
+$ npm install d3-render d3
+```
+
+## Render Function
+
+selection return
+No external libraries, just D3
+
+## Data
+
+## Transitions
+
+## Updates
+
+## Enter/Exit
+
+## Interactivity
+
+## Nesting
+
+## Components
+
+## Advanced
+
+### Selection return example
+
+### Can be Incrementally adopted
+
+## Examples
 
 ## Local Development
 
