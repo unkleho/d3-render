@@ -2,7 +2,7 @@
 
 > Warning, highly experimental at this stage. API will change.
 
-Declarative and reusable D3. Replace D3's `select`, `append`, `data`, `join` and more with one function.
+Declarative and reusable D3. Replace D3's `select`, `append`, `data`, `join`, `enter`, `exit`, `transition` and more with one function.
 
 More detail in in this article: [Introducing D3 Render: Truly Declarative and Reusable D3](https://observablehq.com/d/919e2f0cb6db41fe).
 
@@ -102,7 +102,7 @@ const data = [
 render('#root', data);
 ```
 
-D3 uses this data to append two elements to `#root`, with the following result:
+`render` uses this data to append two elements to `#root`, with the following result:
 
 ```html
 <svg id="root">
@@ -111,7 +111,42 @@ D3 uses this data to append two elements to `#root`, with the following result:
 </svg>
 ```
 
-`render` uses the element objects to call the D3 selection API for you, such as `selection.append()` and `selection.attr('r', 50)`.
+The D3 selection API is called for you, hiding imperative code like `selection.append()` or `selection.attr()`.
+
+`data` can be **hierarchical** in structure with the special `children` key.
+
+Say we want to wrap the circle and rectangle above within a group element:
+
+```js
+const data = [
+  {
+    as: 'g',
+    children: [
+      {
+        as: 'circle',
+        ...
+      },
+      {
+        as: 'rect',
+        ...
+      },
+    ],
+  },
+];
+```
+
+`render` handles D3's nested appends for you and produces:
+
+```html
+<svg id="root">
+  <g>
+    <circle r="50" cx="50" cy="50" fill="purple" />
+    <rect width="100" height="100" x="100" y="0" fill="blue" />
+  </g>
+</svg>
+```
+
+The `children` key can be applied to any element on any level, so you can deeply nest to your hearts content.
 
 #### Element Keys
 
