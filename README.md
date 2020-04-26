@@ -7,8 +7,11 @@ Declarative and reusable D3. Replace selects, appends, joins, data, transitions 
 ```js
 import render from 'd3-render';
 
-const data = [{ as: 'rect', fill: 'pink', x: 0, width: 100, height: 100 }];
+const data = [
+  { as: 'rect', fill: 'pink', x: 0, width: 100, height: 100 }
+];
 
+// Assume your html file has an <svg> element
 render('svg', data);
 ```
 
