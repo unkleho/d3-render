@@ -2,7 +2,7 @@
 
 > Warning, highly experimental at this stage. API will change.
 
-Declarative and reusable D3. Replace select, append, data joins and more with one function.
+Declarative and reusable D3. Replace D3's `select`, `append`, `data`, `join` and more with one function.
 
 More detail in in this article: [Introducing D3 Render: Truly Declarative and Reusable D3](https://observablehq.com/d/919e2f0cb6db41fe).
 
@@ -38,11 +38,11 @@ render('svg', data);
 $ npm install d3-render d3
 ```
 
-D3 Render has no dependencies other than D3 version >=5.
+D3 Render has no dependencies, however it requires D3 version >=5 to be a peer dependency.
 
 ## Documentation
 
-### Render
+### `Render`
 
 Pretty much one function to rule them all. To use, add this to your JavaScript or TypeScript file:
 
@@ -50,6 +50,9 @@ Pretty much one function to rule them all. To use, add this to your JavaScript o
 import render from 'd3-render';
 
 render(selector, data);
+
+// Render also returns the full D3 selection for advanced use cases
+const selection = render(selector, data);
 ```
 
 `render` takes two arguments:
@@ -65,40 +68,108 @@ render('svg', data);
 // Select by id
 render('#root', data);
 
-// Select by class
+// Select first element with this class name
 render('.data-viz', data);
 
 // Select by DOM node
+const node = document.querySelector('.data-viz');
+render(node, data);
 ```
 
-- `data`
+#### `data`
 
-selection return
-No external libraries, just D3
+An array of objects describing elements that D3 will append or update. For example:
 
-## Data
+```js
+const data = [
+  {
+    as: 'circle',
+    r: 50,
+    cx: 50,
+    cy: 50,
+    fill: 'purple',
+  },
+  {
+    as: 'rect',
+    width: 100,
+    height: 100,
+    x: 100,
+    y: 0,
+    fill: 'blue',
+  },
+];
 
-## Transitions
+render('#root', data);
+```
+
+D3 uses this data to append two elements to `#root`, with the following result:
+
+```html
+<svg id="root">
+  <circle r="50" cx="50" cy="50" fill="purple" />
+  <rect width="100" height="100" x="100" y="0" fill="blue" />
+</svg>
+```
+
+`render` uses the element objects to call the D3 selection API for you, such as `selection.append()` and `selection.attr('r', 50)`.
+
+#### Element Keys
+
+Below is a list of important element keys:
+
+| Element Key                     | Description                                                                                                                                                                 |
+| ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `as`\*                          | Any SVG element to append. Runs D3's `selection.append()` behind the scenes. HTML elements will be coming in the future.                                                    |
+| `key`                           | Unique identifier used to match elements on the same nesting level. Useful for transitions.                                                                                 |
+| `class`                         | Class name attached to element eg. `<rect class="my-class">`                                                                                                                |
+| `id`                            | Id attached to element eg. `<ellipse id="my-class">`                                                                                                                        |
+| `x`, `y`, `width`, `height` etc | Any valid attribute for the appended SVG element. Same as using `selection.attr('x', 0)` or `selection.attr('width', 100)`                                                  |
+| `duration`                      | Number in milliseconds. Activates a D3 transition, setting the time it takes for the element to enter, update or exit. Calls `selection.transition().duration(myDuration)`. |
+| `ease`                          | Sets the easing function for D3 transition. Use any D3 easing function [here](https://github.com/d3/d3-ease). eg. `{ as: 'rect', ease: d3.easeQuadInOut`                    |
+| `children`                      | Array of element objects, which will be nested under the current element.                                                                                                   |
+| `onClick`                       | Function to call when element is clicked or tapped. More interactive callbacks to come.                                                                                     |
+
+\* Required
 
 ## Updates
 
+Todo.
+
 ## Enter/Exit
+
+Todo.
 
 ## Interactivity
 
+Todo.
+
 ## Nesting
+
+Todo.
 
 ## Components
 
+Todo.
+
 ## Advanced
+
+Todo.
+
+### No data key?
 
 ### Selection return example
 
+Todo.
+
 ### Can be Incrementally adopted
 
-renderSelection
+Todo.
+
+#### `renderSelection`
 
 ## Examples
+
+Todo.
 
 ## Local Development
 
