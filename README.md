@@ -6,7 +6,9 @@ Declarative and reusable D3. Replace `select`, `append`, `data`, `join`, `enter`
 
 More detail in this article: [Introducing D3 Render: Truly Declarative and Reusable D3](https://observablehq.com/d/919e2f0cb6db41fe).
 
-So what's the difference? Instead of imperative code:
+## So what's the difference? 
+
+Instead of imperative code:
 
 ```js
 import * as d3 from 'd3';
