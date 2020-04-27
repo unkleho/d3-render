@@ -154,7 +154,7 @@ Below is a list of important element keys:
 
 | Element Key                     | Description                                                                                                                                                                 |
 | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `as`\*                          | Any SVG element to append. Runs D3's `selection.append()` behind the scenes. HTML elements will be coming in the future.                                                    |
+| `as`\*                          | Any SVG element to append. eg. `rect`, `circle`, `path`, or `g`. Runs D3's `selection.append()` behind the scenes. HTML elements will be coming in the future.              |
 | `key`                           | Unique identifier used to match elements on the same nesting level. Useful for transitions.                                                                                 |
 | `class`                         | Class name attached to element eg. `<rect class="my-class">`                                                                                                                |
 | `id`                            | Id attached to element eg. `<ellipse id="my-class">`                                                                                                                        |
@@ -168,7 +168,26 @@ Below is a list of important element keys:
 
 ## Updates
 
-Todo.
+To make updates to rendered elements, just run `render` again, but with a different `data` value.
+
+```js
+// Initial data
+const data = [{ as: 'ellipse', fill: 'red', rx: 100, ry: 50 }];
+
+// Initial render on <svg id="#root"></svg>
+render('#root', data);
+
+// After two seconds, change ellipse to blue
+setTimeout(() => {
+  // Set some updated data
+  const newData = [{ as: 'ellipse', fill: 'blue', rx: 100, ry: 50 }];
+
+  // Call render again
+  render('#root', newData);
+}, 2000);
+```
+
+Updates to elements in D3 are normally done like this:
 
 ## Enter/Exit
 
