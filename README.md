@@ -168,11 +168,11 @@ Below is a list of important element keys:
 
 ## Updates
 
-To make updates to rendered elements, just run `render` again, but with a different `data` value.
+To make updates to rendered elements, just run `render` again, but with a different `data` value. Add a duration value for a smooth transition.
 
 ```js
 // Initial data
-const data = [{ as: 'ellipse', fill: 'red', rx: 100, ry: 50 }];
+const data = [{ as: 'ellipse', fill: 'red', rx: 100, ry: 50, duration: 1000 }];
 
 // Initial render on <svg id="#root"></svg>
 render('#root', data);
@@ -180,14 +180,51 @@ render('#root', data);
 // After two seconds, change ellipse to blue
 setTimeout(() => {
   // Set some updated data
-  const newData = [{ as: 'ellipse', fill: 'blue', rx: 100, ry: 50 }];
+  const newData = [
+    { as: 'ellipse', fill: 'blue', rx: 100, ry: 50, duration: 1000 },
+  ];
 
   // Call render again
   render('#root', newData);
 }, 2000);
 ```
 
-Updates to elements in D3 are normally done like this:
+Behind the scenes, `render` does a lot of heavy lifting for you. It binds your `data`, appends the ellipse and then rebinds the `newData` to trigger an update and transistion. This is the equivalent vanilla D3 code:
+
+```js
+const data = [{ fill: 'red' }];
+const svg = d3.select('#root');
+
+function update(data) {
+  svg
+    .selectAll('ellipse')
+    .data(data)
+    .join(
+      enter =>
+        enter
+          .append('ellipse')
+          .attr('rx', 100)
+          .attr('ry', 50)
+          .attr('fill', d => d.fill),
+      update =>
+        update.call(update =>
+          update
+            .transition()
+            .duration(1000)
+            .attr('fill', d => d.fill)
+        )
+    );
+}
+
+update(data);
+
+// After two seconds, turn ellipse blue
+setTimeout(() => {
+  update([{ fill: 'blue' }]);
+}, 2000);
+```
+
+We are using d3-selection 1.4's `join` function, which is much easier to remember than the old [general update pattern](https://bl.ocks.org/mbostock/3808234/457c620cab92e5dc9b8351b31a572fe6eb7d51d7). This [article](https://observablehq.com/@d3/selection-join) from Mike Bostock explains `join` extremely well and is the underlying inspiration for our `render` function.
 
 ## Enter/Exit
 
