@@ -25,3 +25,29 @@ const selection = render('#svg', [
 ]);
 
 selection.append('rect');
+
+// --------------------------------------------------------
+// Update Test
+// --------------------------------------------------------
+
+function updateTest() {
+  const data = [
+    { as: 'ellipse', fill: 'red', rx: 100, ry: 50, duration: 1000 },
+  ];
+
+  // Initial render on <svg id="#root"></svg>
+  render('#update-test', data);
+
+  // After two seconds, change ellipse to blue
+  setTimeout(() => {
+    // Set some updated data
+    const newData = [
+      { as: 'ellipse', fill: 'blue', rx: 100, ry: 50, duration: 1000 },
+    ];
+
+    // Call render again
+    render('#update-test', newData);
+  }, 2000);
+}
+
+updateTest();
