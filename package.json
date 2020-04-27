@@ -7,6 +7,7 @@
     "dist",
     "src"
   ],
+  "homepage": "https://github.com/unkleho/d3-render",
   "engines": {
     "node": ">=10"
   },

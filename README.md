@@ -1,8 +1,8 @@
 # D3 Render
 
-> Warning, highly experimental at this stage. API will change.
-
 Declarative and reusable D3. Replace `select`, `append`, `data`, `join`, `enter`, `exit`, `transition` and more with one function.
+
+> Warning, highly experimental at this stage. API will change.
 
 More detail in this article: [Introducing D3 Render: Truly Declarative and Reusable D3](https://observablehq.com/d/919e2f0cb6db41fe).
 
