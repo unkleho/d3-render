@@ -4,7 +4,7 @@
 
 Declarative and reusable D3. Replace `select`, `append`, `data`, `join`, `enter`, `exit`, `transition` and more with one function.
 
-More detail in in this article: [Introducing D3 Render: Truly Declarative and Reusable D3](https://observablehq.com/d/919e2f0cb6db41fe).
+More detail in this article: [Introducing D3 Render: Truly Declarative and Reusable D3](https://observablehq.com/d/919e2f0cb6db41fe).
 
 So what's the difference? Instead of imperative code:
 
