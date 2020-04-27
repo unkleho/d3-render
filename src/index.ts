@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 
 type ElementData = {
-  as: String;
+  append: String;
   children?: ElementData[] | undefined;
   duration?: Number | Function;
   [key: string]: String | Object | Function | null | undefined;
@@ -28,7 +28,7 @@ export function renderSelection(selection, data: ElementData[], level = 0) {
               // Yes you saw that right. Append element based on 'as' key in data.
               // Makes this whole function incredibly flexible
               // @ts-ignore
-              document.createElementNS(d3.namespace('svg').space, d.as)
+              document.createElementNS(d3.namespace('svg').space, d.append)
             )
             .each(function(d) {
               // Hook into things like selection.call(xAxis)
@@ -77,7 +77,7 @@ export function renderSelection(selection, data: ElementData[], level = 0) {
 function addAttributes(selection, data, state) {
   // Assume anything other than key, text, onClick etc are attributes
   // TODO: Will need to keep adding to this list
-  const { as, key, text, onClick, children, ease, ...attributes } = data;
+  const { append, key, text, onClick, children, ease, ...attributes } = data;
 
   // Rather than hand coding every attribute, we loop over the attributes object
   for (const key in attributes) {

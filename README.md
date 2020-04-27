@@ -6,7 +6,7 @@ Declarative and reusable D3. Replace `select`, `append`, `data`, `join`, `enter`
 
 More detail in this article: [Introducing D3 Render: Truly Declarative and Reusable D3](https://observablehq.com/d/919e2f0cb6db41fe).
 
-## So what's the difference? 
+## So what's the difference?
 
 Instead of imperative code:
 
@@ -28,7 +28,7 @@ Write declarative style like this:
 ```js
 import render from 'd3-render';
 
-const data = [{ as: 'rect', fill: 'pink', x: 0, width: 100, height: 100 }];
+const data = [{ append: 'rect', fill: 'pink', x: 0, width: 100, height: 100 }];
 
 // Assume your HTML file has an <svg> element
 render('svg', data);
@@ -85,14 +85,14 @@ An array of objects describing elements that D3 will append or update. For examp
 ```js
 const data = [
   {
-    as: 'circle',
+    append: 'circle',
     r: 50,
     cx: 50,
     cy: 50,
     fill: 'purple',
   },
   {
-    as: 'rect',
+    append: 'rect',
     width: 100,
     height: 100,
     x: 100,
@@ -122,14 +122,14 @@ Say we want to wrap the circle and rectangle above within a group element:
 ```js
 const data = [
   {
-    as: 'g',
+    append: 'g',
     children: [
       {
-        as: 'circle',
+        append: 'circle',
         ...
       },
       {
-        as: 'rect',
+        append: 'rect',
         ...
       },
     ],
@@ -156,14 +156,14 @@ Below is a list of important element keys:
 
 | Element Key                                           | Description                                                                                                                                                                                                                                                                                                  |
 | ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `as`\*                                                | Any SVG element to append. eg. `rect`, `circle`, `path`, or `g` and more. Runs D3's `selection.append()` behind the scenes. HTML elements will be coming in the future.                                                                                                                                      |
+| `append`\*                                            | Any SVG element to append. eg. `rect`, `circle`, `path`, or `g` and more. Runs D3's `selection.append()` behind the scenes. HTML elements will be coming in the future.                                                                                                                                      |
 | `key`                                                 | Unique identifier used to match elements on the same nesting level. Useful for transitions.                                                                                                                                                                                                                  |
-| `class`                                               | Class name attached to element eg. `<rect class="my-class">`                                                                                                                                                                                                                                                 |
-| `id`                                                  | Id attached to element eg. `<ellipse id="my-class">`                                                                                                                                                                                                                                                         |
+| `class`                                               | Class name attached to element. Produces `<rect class="my-class">`                                                                                                                                                                                                                                           |
+| `id`                                                  | Id attached to element. Produces `<ellipse id="my-class">`                                                                                                                                                                                                                                                   |
 | `x`, `y`, `width`, `height`, `cx`, `cy`, `r`, `d` etc | Any valid attribute and value for the appended SVG element. Same as using `selection.attr()`. Can optionally use `{ enter, exit }` for animation (but must have a `duration`) . For example, to expand/contract height from `0` to `100px` when element enters/exits, use: `height: { enter: 100, exit: 0 }` |
-| `text`                                                | Text string to display in element. Only works for `text` elements. eg. `{ as: text, text: 'Greetings'}`                                                                                                                                                                                                      |
+| `text`                                                | Text string to display in element. Only works for `text` elements. eg. `{ append: text, text: 'Greetings'}`                                                                                                                                                                                                  |
 | `duration`                                            | Number in milliseconds. Activates a D3 transition, setting the time it takes for the element to enter, update or exit. Calls `selection.transition().duration(myDuration)`.                                                                                                                                  |
-| `ease`                                                | Sets the easing function for D3 transition. Use any D3 easing function [here](https://github.com/d3/d3-ease). eg. `{ as: 'rect', ease: d3.easeQuadInOut`                                                                                                                                                     |
+| `ease`                                                | Sets the easing function for D3 transition. Use any D3 easing function [here](https://github.com/d3/d3-ease). eg. `{ append: 'rect', ease: d3.easeQuadInOut`                                                                                                                                                 |
 | `children`                                            | Array of element objects, which will be nested under the current element.                                                                                                                                                                                                                                    |
 | `onClick`                                             | Function to call when element is clicked or tapped. More interactive callbacks to come.                                                                                                                                                                                                                      |
 
@@ -175,7 +175,9 @@ To make updates to rendered elements, just run `render` again, but with a differ
 
 ```js
 // Initial data
-const data = [{ as: 'ellipse', fill: 'red', rx: 100, ry: 50, duration: 1000 }];
+const data = [
+  { append: 'ellipse', fill: 'red', rx: 100, ry: 50, duration: 1000 },
+];
 
 // Initial render on <svg id="#root"></svg>
 render('#root', data);
@@ -184,7 +186,7 @@ render('#root', data);
 setTimeout(() => {
   // Set some updated data
   const newData = [
-    { as: 'ellipse', fill: 'blue', rx: 100, ry: 50, duration: 1000 },
+    { append: 'ellipse', fill: 'blue', rx: 100, ry: 50, duration: 1000 },
   ];
 
   // Call render again
@@ -242,7 +244,7 @@ render('#root', []);
 
 // Two seconds later, re-render with a new text element
 setTimeout(() => {
-  render('#root', [{ as: 'rect', width: 100, height: 100, fill: 'pink' }]);
+  render('#root', [{ append: 'rect', width: 100, height: 100, fill: 'pink' }]);
   // Renders: <svg id="root"><text>Howdy there!</text></svg>
 
   // Two seconds after text element appears, remove it
@@ -265,7 +267,7 @@ render('#root', []);
 setTimeout(() => {
   render('#root', [
     {
-      as: 'rect',
+      append: 'rect',
       // Was width: 0
       width: { enter: 100, exit: 0 },
       height: 100,

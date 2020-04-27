@@ -5,16 +5,16 @@ import render from '../';
 
 const selection = render('#svg', [
   {
-    as: 'g',
+    append: 'g',
     children: [
       {
-        as: 'rect',
+        append: 'rect',
         width: 100,
         height: 100,
         fill: 'red',
       },
       {
-        as: 'circle',
+        append: 'circle',
         r: 50,
         cx: 150,
         cy: 50,
@@ -32,7 +32,7 @@ selection.append('rect');
 
 function updateTest() {
   const data = [
-    { as: 'ellipse', fill: 'red', rx: 100, ry: 50, duration: 1000 },
+    { append: 'ellipse', fill: 'red', rx: 100, ry: 50, duration: 1000 },
   ];
 
   // Initial render on <svg id="#root"></svg>
@@ -42,7 +42,7 @@ function updateTest() {
   setTimeout(() => {
     // Set some updated data
     const newData = [
-      { as: 'ellipse', fill: 'blue', rx: 100, ry: 50, duration: 1000 },
+      { append: 'ellipse', fill: 'blue', rx: 100, ry: 50, duration: 1000 },
     ];
 
     // Call render again
