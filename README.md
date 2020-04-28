@@ -4,7 +4,7 @@ Declarative and reusable D3. Replace `select`, `append`, `data`, `join`, `enter`
 
 > Warning, highly experimental at this stage. API will change.
 
-More detail in this article: [Introducing D3 Render: Truly Declarative and Reusable D3](https://observablehq.com/d/919e2f0cb6db41fe).
+More detail in this article: [Introducing D3 Render: Truly Declarative and Reusable D3](https://observablehq.com/@unkleho/introducing-d3-render-truly-declarative-and-reusable-d3).
 
 ## What's the difference?
 
@@ -289,6 +289,44 @@ When the `rect` is removed from `data`, the exit transition kicks in, animating 
 
 The `{ enter, exit }` animation object is a powerful pattern that can be applied to **any** attribute in the element.
 
+### React Example
+
+D3 Render is actually inspired by React's declarative mental model, so it is no suprise that integration between the two is quite simple:
+
+```jsx
+// App.js
+
+import React from 'react';
+import render from 'd3-render';
+
+const App = () => {
+  const svg = React.useRef();
+  const [data, setData] = React.useState([
+    {
+      append: 'rect',
+      width: 100,
+      height: 100,
+      fill: 'green',
+      duration: 1000,
+      // Add some interactivity to the <rect> element
+      onClick: () => {
+        setData([{ ...data[0], fill: 'yellow' }]);
+      },
+    },
+  ]);
+
+  React.useEffect(() => {
+    if (svg && svg.current) {
+      // Pass svg node to D3 render, along with data.
+      // render runs whenever data changes
+      render(svg.current, data);
+    }
+  }, [data]);
+
+  return <svg ref={svg}></svg>;
+};
+```
+
 ## Todos
 
 ### Documentation
@@ -300,7 +338,6 @@ The `{ enter, exit }` animation object is a powerful pattern that can be applied
 - [ ] Data `key` example
 - [ ] Selection return example
 - [ ] Incremental adoption example with `renderSelection`
-- [ ] React example
 
 ### API
 

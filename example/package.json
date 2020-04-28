@@ -9,7 +9,9 @@
   },
   "dependencies": {
     "d3": "^5.16.0",
-    "d3-render": "^0.1.1"
+    "d3-render": "^0.1.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   },
   "devDependencies": {
     "parcel": "^1.12.3",
