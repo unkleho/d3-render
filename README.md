@@ -6,14 +6,14 @@ Declarative and reusable D3. Replace `select`, `append`, `data`, `join`, `enter`
 
 More detail in this article: [Introducing D3 Render: Truly Declarative and Reusable D3](https://observablehq.com/d/919e2f0cb6db41fe).
 
-## So what's the difference?
+## What's the difference?
 
 Instead of imperative code:
 
 ```js
 import * as d3 from 'd3';
 
-// Assume your HTML file has an <svg> element
+// HTML file has an <svg> element
 const svg = d3.select('svg');
 svg
   .append('rect')
@@ -30,7 +30,7 @@ import render from 'd3-render';
 
 const data = [{ append: 'rect', fill: 'pink', x: 0, width: 100, height: 100 }];
 
-// Assume your HTML file has an <svg> element
+// HTML file has an <svg> element
 render('svg', data);
 ```
 
@@ -154,18 +154,18 @@ The `children` key can be applied to any element on any level, so you can deeply
 
 Below is a list of important element keys:
 
-| Element Key                                           | Description                                                                                                                                                                                                                                                                                                  |
-| ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `append`\*                                            | Any SVG element to append. eg. `rect`, `circle`, `path`, or `g` and more. Runs D3's `selection.append()` behind the scenes. HTML elements will be coming in the future.                                                                                                                                      |
-| `key`                                                 | Unique identifier used to match elements on the same nesting level. Useful for transitions.                                                                                                                                                                                                                  |
-| `class`                                               | Class name attached to element. Produces `<rect class="my-class">`                                                                                                                                                                                                                                           |
-| `id`                                                  | Id attached to element. Produces `<ellipse id="my-class">`                                                                                                                                                                                                                                                   |
-| `x`, `y`, `width`, `height`, `cx`, `cy`, `r`, `d` etc | Any valid attribute and value for the appended SVG element. Same as using `selection.attr()`. Can optionally use `{ enter, exit }` for animation (but must have a `duration`) . For example, to expand/contract height from `0` to `100px` when element enters/exits, use: `height: { enter: 100, exit: 0 }` |
-| `text`                                                | Text string to display in element. Only works for `text` elements. eg. `{ append: text, text: 'Greetings'}`                                                                                                                                                                                                  |
-| `duration`                                            | Number in milliseconds. Activates a D3 transition, setting the time it takes for the element to enter, update or exit. Calls `selection.transition().duration(myDuration)`.                                                                                                                                  |
-| `ease`                                                | Sets the easing function for D3 transition. Use any D3 easing function [here](https://github.com/d3/d3-ease). eg. `{ append: 'rect', ease: d3.easeQuadInOut`                                                                                                                                                 |
-| `children`                                            | Array of element objects, which will be nested under the current element.                                                                                                                                                                                                                                    |
-| `onClick`                                             | Function to call when element is clicked or tapped. More interactive callbacks to come.                                                                                                                                                                                                                      |
+| Element Key                                           | Description                                                                                                                                                                                                                                                                                                        |
+| ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `append`\*                                            | Any SVG element to append. eg. `rect`, `circle`, `path`, or `g` and more. Runs D3's `selection.append()` behind the scenes. HTML elements will be coming in the future.                                                                                                                                            |
+| `key`                                                 | Unique identifier used to match elements on the same nesting level. Useful for transitions.                                                                                                                                                                                                                        |
+| `class`                                               | Class name attached of appended element                                                                                                                                                                                                                                                                            |
+| `id`                                                  | Id of appended element                                                                                                                                                                                                                                                                                             |
+| `x`, `y`, `width`, `height`, `cx`, `cy`, `r`, `d` etc | Any valid attribute and value for the appended SVG element. Same as using `selection.attr()`. Can optionally use `{ enter, exit }` for animation (but must have a `duration`) . For example, to expand or contract height from `0` to `100px` when element enters or exits, use: `height: { enter: 100, exit: 0 }` |
+| `text`                                                | Text string to display in element. Only works for `text` elements. eg. `{ append: text, text: 'Greetings'}`                                                                                                                                                                                                        |
+| `duration`                                            | Number in milliseconds. Activates a D3 transition, setting the time it takes for the element to enter, update or exit. Calls `selection.transition().duration(myDuration)`.                                                                                                                                        |
+| `ease`                                                | Sets the easing function for D3 transition. Use any D3 easing function [here](https://github.com/d3/d3-ease). eg. `{ append: 'rect', ease: d3.easeQuadInOut`                                                                                                                                                       |
+| `children`                                            | Array of element objects, which will be nested under the current element.                                                                                                                                                                                                                                          |
+| `onClick`                                             | Function to call when element is clicked or tapped. More interactive callbacks to come.                                                                                                                                                                                                                            |
 
 \* Required
 
