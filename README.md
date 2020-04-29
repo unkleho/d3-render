@@ -344,6 +344,7 @@ const App = () => {
 
 ### API
 
+- [ ] Use camelCased element keys and then convert to snake-case for selection.attr()
 - [ ] Enable HTML element appends
 - [ ] Add `update` to `{ enter, exit }` transition object
 - [ ] Add more on\* events
