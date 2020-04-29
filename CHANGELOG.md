@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.1.5] - 2020-04-29
 
 - Add `unpkg` to `package.json` for easier use with ObservableHQ
+- Add `delay` element key for more transition control
 
 ## [0.1.4] - 2020-04-28
 

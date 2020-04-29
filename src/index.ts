@@ -77,7 +77,16 @@ export function renderSelection(selection, data: ElementData[], level = 0) {
 function addAttributes(selection, data, state) {
   // Assume anything other than key, text, onClick etc are attributes
   // TODO: Will need to keep adding to this list
-  const { append, key, text, onClick, children, ease, ...attributes } = data;
+  const {
+    append,
+    key,
+    text,
+    onClick,
+    children,
+    ease,
+    duration,
+    ...attributes
+  } = data;
 
   // Rather than hand coding every attribute, we loop over the attributes object
   for (const key in attributes) {
@@ -115,6 +124,7 @@ function addAttributes(selection, data, state) {
 function addTransition(selection, data = {}, state = 'enter') {
   let transition = selection
     .transition()
+    .delay(d => getValue(d.delay, state) || 0)
     .duration(getDuration)
     // @ts-ignore
     .ease(t => getEase(t, data.ease));
@@ -142,4 +152,12 @@ function exitTransition(d) {
 
 function getDuration(d) {
   return d.duration;
+}
+
+function getValue(value, state) {
+  if (typeof value === 'object') {
+    return value[state];
+  }
+
+  return value;
 }
