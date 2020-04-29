@@ -115,6 +115,8 @@ render('#root', data);
 
 The D3 selection API is called for you, hiding imperative code like `selection.append()` or `selection.attr()`.
 
+##### Nesting
+
 `data` can be **hierarchical** in structure with the special `children` key.
 
 Say we want to wrap the circle and rectangle above within a group element:
@@ -242,7 +244,7 @@ Here is a simple example below:
 render('#root', []);
 // Renders: <svg id="root"></svg>
 
-// Two seconds later, re-render with a new text element
+// Two seconds later, re-render with a new rect element
 setTimeout(() => {
   render('#root', [{ append: 'rect', width: 100, height: 100, fill: 'pink' }]);
   // Renders: <svg id="root"><text>Howdy there!</text></svg>
