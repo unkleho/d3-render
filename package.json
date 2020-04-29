@@ -1,7 +1,7 @@
 {
   "name": "d3-render",
   "author": "Kaho Cheung",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "license": "MIT",
   "module": "dist/d3-render.esm.js",
   "unpkg": "dist/d3-render.umd.production.min.js",
