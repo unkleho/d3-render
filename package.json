@@ -1,6 +1,10 @@
 {
+  "name": "d3-render",
+  "author": "Kaho Cheung",
   "version": "0.1.4",
   "license": "MIT",
+  "module": "dist/d3-render.esm.js",
+  "unpkg": "dist/d3-render.umd.production.min.js",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
@@ -32,9 +36,6 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "d3-render",
-  "author": "Kaho Cheung",
-  "module": "dist/d3-render.esm.js",
   "devDependencies": {
     "@types/d3": "^5.7.2",
     "d3": "^5.16.0",
