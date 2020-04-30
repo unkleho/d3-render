@@ -340,19 +340,23 @@ const App = () => {
 - [ ] Component example
 - [ ] Data `key` example
 - [ ] Selection return example
-- [ ] Incremental adoption example with `renderSelection`
+- [ ] Incremental adoption example with `d3.select('svg').call(renderSelection, data)`
 
 ### API
 
+- [ ] Reduce bundle size by only requiring `d3-selection` and `d3-transition`
+- [ ] Merge `render` and `renderSelection` into one function
+- [ ] Try `selection.prototype = render` for `d3.render()` to work
+- [ ] Pass element node through function value eg. `delay: (d, i, node) => node.getTotalLength()`
 - [ ] Use camelCased element keys and then convert to snake-case for selection.attr()
-- [ ] Enable HTML element appends
 - [ ] Add `update` to `{ enter, exit }` transition object
 - [ ] Add more on\* events
 - [ ] Add `style` attribute key
 - [ ] Consider `enterStart` and `exitStart` in transition object
 - [ ] Integrate `selection.html()`
-- [ ] Consider `{ enter, exit }` for `ease` and `duration`
+- [ ] Consider `{ enter, exit }` for `ease`, `delay` and `duration`
 - [ ] Design declarative API for complex timeline based animations
+- [ ] Enable HTML element appends
 
 ## Local Development
 
