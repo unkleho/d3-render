@@ -344,19 +344,20 @@ const App = () => {
 
 ### API
 
+- [ ] Add tests
+- [ ] Add `style` attribute key
 - [ ] Reduce bundle size by only requiring `d3-selection` and `d3-transition`
 - [ ] Merge `render` and `renderSelection` into one function
-- [ ] Try `selection.prototype = render` for `d3.render()` to work
 - [ ] Pass element node through function value eg. `delay: (d, i, node) => node.getTotalLength()`
 - [ ] Use camelCased element keys and then convert to snake-case for selection.attr()
-- [ ] Add `update` to `{ enter, exit }` transition object
 - [ ] Add more on\* events
-- [ ] Add `style` attribute key
+- [ ] Add `update` to `{ enter, exit }` transition object
+- [ ] Try `selection.prototype = render` for `d3.render()` to work
 - [ ] Consider `enterStart` and `exitStart` in transition object
-- [ ] Integrate `selection.html()`
 - [ ] Consider `{ enter, exit }` for `ease`, `delay` and `duration`
-- [ ] Design declarative API for complex timeline based animations
+- [ ] Integrate `selection.html()`
 - [ ] Enable HTML element appends
+- [ ] Design declarative API for complex timeline based animations
 
 ## Local Development
 
