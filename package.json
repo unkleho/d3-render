@@ -1,6 +1,9 @@
 {
   "name": "d3-render",
-  "author": "Kaho Cheung",
+  "author": {
+    "name": "Kaho Cheung",
+    "url": "https://github.com/unkleho"
+  },
   "version": "0.1.5",
   "license": "MIT",
   "module": "dist/d3-render.esm.js",

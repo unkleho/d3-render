@@ -1,12 +1,12 @@
 import * as d3 from 'd3';
 
+// import '../';
 import render from '../';
 // import render from 'd3-render';
 
-// --------------------------------------------------------
-// Append Test
-// --------------------------------------------------------
-
+/**
+ * Append Test
+ */
 function appendTest() {
   const selection = render('#append-test', [
     {
@@ -34,10 +34,9 @@ function appendTest() {
 
 appendTest();
 
-// --------------------------------------------------------
-// Update Test
-// --------------------------------------------------------
-
+/**
+ * Update Test
+ */
 function updateTest() {
   const data = [
     {
@@ -67,10 +66,9 @@ function updateTest() {
 
 updateTest();
 
-// --------------------------------------------------------
-// Enter Test
-// --------------------------------------------------------
-
+/**
+ * Enter Test
+ */
 function enterTest() {
   const data = [
     {
@@ -112,3 +110,21 @@ function selectionTest() {
 }
 
 selectionTest();
+
+/**
+ * Render Chain Test
+ * Check if `render` can accept a D3 selection
+ * TODO: In progress
+ */
+// function renderChainTest() {
+//   const svg = d3.select('#render-chain-test').render([
+//     {
+//       append: 'text',
+//       text: 'render from d3.select',
+//       y: 8,
+//       'font-size': 8,
+//     },
+//   ]);
+// }
+
+// renderChainTest();

@@ -76,6 +76,12 @@ render('.data-viz', data);
 // Select by DOM node
 const node = document.querySelector('.data-viz');
 render(node, data);
+
+// Select by D3 selection
+const selection = d3.select('svg');
+render(selection, data);
+// or called by D3
+d3.select('svg').call(render, data);
 ```
 
 #### `data`
@@ -347,7 +353,7 @@ const App = () => {
 - [ ] Add tests
 - [ ] Add `style` attribute key
 - [x] Reduce bundle size by only requiring `d3-selection` and `d3-transition`
-- [ ] Merge `render` and `renderSelection` into one function
+- [x] Merge `render` and `renderSelection` into one function
 - [ ] Pass element node through function value eg. `delay: (d, i, node) => node.getTotalLength()`
 - [ ] Use camelCased element keys and then convert to snake-case for selection.attr()
 - [ ] Add more on\* events
