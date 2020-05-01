@@ -1,4 +1,5 @@
-import * as d3 from 'd3';
+import * as d3 from 'd3-selection';
+import 'd3-transition';
 
 type ElementDatum = {
   append: string;

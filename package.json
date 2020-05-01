@@ -22,8 +22,17 @@
     "lint": "tsdx lint",
     "prepare": "tsdx build --format cjs,esm,umd"
   },
-  "peerDependencies": {
-    "d3": ">=5"
+  "dependencies": {
+    "d3-selection": "^1.4.1",
+    "d3-transition": "^1.3.2"
+  },
+  "devDependencies": {
+    "@types/d3": "^5.7.2",
+    "d3": "^5.16.0",
+    "husky": "^4.2.5",
+    "tsdx": "^0.13.2",
+    "tslib": "^1.11.1",
+    "typescript": "^3.8.3"
   },
   "husky": {
     "hooks": {
@@ -35,13 +44,5 @@
     "semi": true,
     "singleQuote": true,
     "trailingComma": "es5"
-  },
-  "devDependencies": {
-    "@types/d3": "^5.7.2",
-    "d3": "^5.16.0",
-    "husky": "^4.2.5",
-    "tsdx": "^0.13.2",
-    "tslib": "^1.11.1",
-    "typescript": "^3.8.3"
   }
 }

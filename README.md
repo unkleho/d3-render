@@ -37,10 +37,10 @@ render('svg', data);
 ## Getting Started
 
 ```bash
-$ npm install d3-render d3
+$ npm install d3-render
 ```
 
-D3 Render has no dependencies, however it requires D3 version >=5 to be a peer dependency.
+D3 Render only has `d3-selection` and `d3-transition` as dependencies.
 
 ## Documentation
 
