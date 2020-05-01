@@ -1,21 +1,21 @@
 import * as d3 from 'd3';
 
-type ElementData = {
+type ElementDatum = {
   append: string;
-  children?: ElementData[] | undefined;
+  children?: ElementDatum[] | undefined;
   duration?: number | Function;
   delay?: number | Function;
   ease?: Function;
   [key: string]: number | string | object | Function | null | undefined;
 };
 
-export default function render(selector, data: ElementData[]) {
+export default function render(selector, data: ElementDatum[]) {
   const selection = d3.select(selector);
 
   return renderSelection(selection, data);
 }
 
-export function renderSelection(selection, data: ElementData[], level = 0) {
+export function renderSelection(selection, data: ElementDatum[], level = 0) {
   return (
     selection
       // Cool way to select immediate children. (Totally didn't know you could do this)
@@ -27,7 +27,7 @@ export function renderSelection(selection, data: ElementData[], level = 0) {
         enter => {
           return enter
             .append(d =>
-              // Yes you saw that right. Append element based on 'as' key in data.
+              // Yes you saw that right. Append element based on 'append' key in data.
               // Makes this whole function incredibly flexible
               // @ts-ignore
               document.createElementNS(d3.namespace('svg').space, d.append)
@@ -124,13 +124,19 @@ function addAttributes(selection, data, state) {
   return selection;
 }
 
-function addTransition(selection, data = {}, state = 'enter') {
+function addTransition(
+  selection,
+  datum: ElementDatum = { append: null },
+  state = 'enter'
+) {
   let transition = selection
     .transition()
     .delay(d => getValue(d.delay, state) || 0)
-    .duration(getDuration)
-    // @ts-ignore
-    .ease(t => getEase(t, data.ease));
+    .duration(getDuration);
+
+  if (typeof datum.ease === 'function') {
+    transition = transition.ease(t => datum.ease(t));
+  }
 
   if (state === 'exit') {
     transition = transition.remove();
@@ -138,15 +144,7 @@ function addTransition(selection, data = {}, state = 'enter') {
 
   return selection
     .transition(transition)
-    .call(selection => addAttributes(selection, data, state));
-}
-
-function getEase(t, ease) {
-  if (typeof ease === 'function') {
-    return ease(t);
-  }
-
-  return d3.easeCubicInOut(t);
+    .call(selection => addAttributes(selection, datum, state));
 }
 
 function exitTransition(d) {

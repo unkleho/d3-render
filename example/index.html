@@ -5,21 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Playground</title>
+    <style>
+      @import url('https://rsms.me/inter/inter.css');
+      html {
+        font-family: 'Inter', sans-serif;
+      }
+      @supports (font-variation-settings: normal) {
+        html {
+          font-family: 'Inter var', sans-serif;
+        }
+      }
+    </style>
   </head>
 
   <body>
     <h1>D3 Render Test Page</h1>
 
-    <div id="root"></div>
-    <svg id="svg"></svg>
-    <svg id="update-test"></svg>
+    <h2>Append</h2>
+    <svg id="append-test" width="100" height="50"></svg>
+
+    <h2>Update</h2>
+    <svg id="update-test" height="50"></svg>
+    <script src="./index.ts"></script>
+
+    <h2>Enter</h2>
+    <svg id="enter-test" height="50"></svg>
     <script src="./index.ts"></script>
 
     <h2>Hierarchy</h2>
-    <svg id="hierarchy"></svg>
+    <svg id="hierarchy" height="50"></svg>
     <script src="./hierarchy.ts"></script>
 
-    <h2>React Test</h2>
+    <h2>React</h2>
     <div id="react"></div>
     <script src="./react.tsx"></script>
   </body>
