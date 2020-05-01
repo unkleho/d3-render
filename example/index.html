@@ -4,40 +4,49 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Playground</title>
-    <style>
-      @import url('https://rsms.me/inter/inter.css');
-      html {
-        font-family: 'Inter', sans-serif;
-      }
-      @supports (font-variation-settings: normal) {
-        html {
-          font-family: 'Inter var', sans-serif;
-        }
-      }
-    </style>
+    <title>D3 Render Test Page</title>
+    <link href="./styles/global.scss" type="text/css" rel="stylesheet" />
   </head>
 
   <body>
     <h1>D3 Render Test Page</h1>
+    <div class="cluster">
+      <div>
+        <div>
+          <h2>Append</h2>
+          <svg id="append-test"></svg>
+        </div>
 
-    <h2>Append</h2>
-    <svg id="append-test" width="100" height="50"></svg>
+        <div>
+          <h2>Update</h2>
+          <svg id="update-test"></svg>
+          <script src="./index.ts"></script>
+        </div>
 
-    <h2>Update</h2>
-    <svg id="update-test" height="50"></svg>
-    <script src="./index.ts"></script>
+        <div>
+          <h2>Enter</h2>
+          <svg id="enter-test"></svg>
+          <script src="./index.ts"></script>
+        </div>
 
-    <h2>Enter</h2>
-    <svg id="enter-test" height="50"></svg>
-    <script src="./index.ts"></script>
+        <div>
+          <h2>Selection</h2>
+          <svg id="selection-test"></svg>
+          <script src="./index.ts"></script>
+        </div>
 
-    <h2>Hierarchy</h2>
-    <svg id="hierarchy" height="50"></svg>
-    <script src="./hierarchy.ts"></script>
+        <div>
+          <h2>Hierarchy</h2>
+          <svg id="hierarchy" style="width: 150px"></svg>
+          <script src="./hierarchy.ts"></script>
+        </div>
 
-    <h2>React</h2>
-    <div id="react"></div>
-    <script src="./react.tsx"></script>
+        <div>
+          <h2>React</h2>
+          <div id="react"></div>
+          <script src="./react.tsx"></script>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

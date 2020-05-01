@@ -346,7 +346,7 @@ const App = () => {
 
 - [ ] Add tests
 - [ ] Add `style` attribute key
-- [ ] Reduce bundle size by only requiring `d3-selection` and `d3-transition`
+- [x] Reduce bundle size by only requiring `d3-selection` and `d3-transition`
 - [ ] Merge `render` and `renderSelection` into one function
 - [ ] Pass element node through function value eg. `delay: (d, i, node) => node.getTotalLength()`
 - [ ] Use camelCased element keys and then convert to snake-case for selection.attr()

@@ -9,8 +9,8 @@ const App = () => {
   const [data, setData] = React.useState([
     {
       append: 'rect',
-      width: 100,
-      height: 100,
+      width: 50,
+      height: 50,
       fill: 'green',
       duration: 1000,
       onClick: () => {

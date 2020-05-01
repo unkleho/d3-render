@@ -93,3 +93,22 @@ function enterTest() {
 }
 
 enterTest();
+
+/**
+ * Selection Test
+ * Check if `render` can accept a D3 selection
+ */
+function selectionTest() {
+  const svg = d3.select('#selection-test');
+
+  render(svg, [
+    {
+      append: 'text',
+      text: 'render from d3.select',
+      y: 8,
+      'font-size': 8,
+    },
+  ]);
+}
+
+selectionTest();
