@@ -1,10 +1,12 @@
 import * as d3 from 'd3';
 
 type ElementData = {
-  append: String;
+  append: string;
   children?: ElementData[] | undefined;
-  duration?: Number | Function;
-  [key: string]: String | Object | Function | null | undefined;
+  duration?: number | Function;
+  delay?: number | Function;
+  ease?: Function;
+  [key: string]: number | string | object | Function | null | undefined;
 };
 
 export default function render(selector, data: ElementData[]) {
@@ -83,8 +85,9 @@ function addAttributes(selection, data, state) {
     text,
     onClick,
     children,
-    ease,
     duration,
+    delay,
+    ease,
     ...attributes
   } = data;
 
