@@ -14,7 +14,6 @@ const App = () => {
       fill: 'green',
       // fill: (datum, index, node) => {
       //   console.log(datum, index, node);
-
       //   return 'green';
       // },
       duration: 1000,
