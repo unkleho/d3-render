@@ -1,6 +1,10 @@
 import * as d3 from 'd3';
 
-// import '../';
+// import * as d3 from '../node_modules/d3-selection';
+// import '../node_modules/d3-transition';
+
+// console.log(d3);
+
 import render from '../';
 // import render from 'd3-render';
 
@@ -119,7 +123,7 @@ function selectionTest() {
 selectionTest();
 
 /**
- * Selection Test
+ * Style Test
  * Check if `render` can accept a D3 selection
  */
 function styleTest() {
@@ -137,6 +141,27 @@ function styleTest() {
 }
 
 styleTest();
+
+/**
+ * onClick test
+ */
+
+function onClickTest() {
+  render('#on-click-test', [
+    {
+      append: 'rect',
+      width: 50,
+      height: 50,
+      fill: 'orange',
+      onClick: (event, d, i, node) => {
+        // TODO: Try d3.select(this)
+        console.log(event, d, i, node);
+      },
+    },
+  ]);
+}
+
+onClickTest();
 
 /**
  * Render Chain Test

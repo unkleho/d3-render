@@ -54,12 +54,12 @@ function renderSelection(selection, data: ElementDatum[], level = 0) {
 
               // Add initial attributes. For now, initial and exit values are the same
               d3.select(this).call(selection =>
-                addAttributes(selection, d, 'exit')
+                addAttributes(selection, d, 'exit', this)
               );
 
               // Add enter transitions
               d3.select(this).call(selection =>
-                addTransition(selection, d, 'enter')
+                addTransition(selection, d, 'enter', this)
               );
 
               // Recursively run again, passing in each child in selection
@@ -69,7 +69,7 @@ function renderSelection(selection, data: ElementDatum[], level = 0) {
         update => {
           return update.each(function(d) {
             d3.select(this).call(selection =>
-              addTransition(selection, d, 'enter')
+              addTransition(selection, d, 'enter', this)
             );
 
             renderSelection(d3.select(this), d.children, level + 1);
@@ -90,7 +90,18 @@ function renderSelection(selection, data: ElementDatum[], level = 0) {
   );
 }
 
-function addAttributes(selection, datum: ElementDatum, state: TransitionState) {
+/**
+ * Add attributes to element node
+ * @param selection
+ * @param datum
+ * @param state
+ */
+function addAttributes(
+  selection,
+  datum: ElementDatum,
+  state: TransitionState,
+  node = null
+) {
   // Assume anything other than key, text, onClick etc are attributes
   // TODO: Will need to keep adding to this list
   const {
@@ -127,7 +138,7 @@ function addAttributes(selection, datum: ElementDatum, state: TransitionState) {
     if (typeof d.onClick === 'function') {
       d3.select(this).on('click', function(d, i) {
         // @ts-ignore
-        d.onClick(d3.event, d, i);
+        d.onClick(d3.event, d, i, node);
       });
     }
   });
@@ -149,7 +160,8 @@ function addStyles(selection, styles: ElementStyles, state: TransitionState) {
 function addTransition(
   selection,
   datum: ElementDatum = { append: null },
-  state: TransitionState = 'enter'
+  state: TransitionState = 'enter',
+  node = null
 ) {
   let transition = selection
     .transition()
@@ -166,7 +178,7 @@ function addTransition(
 
   return selection
     .transition(transition)
-    .call(selection => addAttributes(selection, datum, state));
+    .call(selection => addAttributes(selection, datum, state, node));
 }
 
 function exitTransition(d) {

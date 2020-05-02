@@ -353,10 +353,10 @@ const App = () => {
 
 - [x] Reduce bundle size by only requiring `d3-selection` and `d3-transition`
 - [x] Merge `render` and `renderSelection` into one function
-- [ ] Add `style` attribute key
-- [ ] Use camelCased element keys and then convert to snake-case for selection.attr()
+- [x] Add `style` attribute key
+- [x] Use camelCased element keys and then convert to snake-case for selection.attr()
 - [ ] Add more on\* events
-- [ ] Try `selection.prototype = render` for `d3.render()` to work
+- [x] Try `selection.prototype = render` for `d3.render()` to work
 - [ ] Enable HTML element appends
 - [ ] Add tests
 - [ ] Pass element node through function value eg. `delay: (d, i, node) => node.getTotalLength()`
