@@ -102,6 +102,8 @@ function addAttributes(
   state: TransitionState,
   node = null
 ) {
+  // console.log(node);
+
   // Assume anything other than key, text, onClick etc are attributes
   // TODO: Will need to keep adding to this list
   const {
@@ -114,6 +116,13 @@ function addAttributes(
     delay,
     ease,
     onClick,
+    // onMouseDown,
+    // onMouseMove,
+    // onMouseOut,
+    // onMouseOver,
+    // onMouseUp,
+    // onMouseWheel,
+    // onWheel,
     ...attributes
   } = datum;
 
