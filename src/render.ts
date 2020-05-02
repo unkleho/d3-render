@@ -25,7 +25,8 @@ type TransitionState = 'enter' | 'exit';
  * @param data
  */
 export default function render(selector, data: ElementDatum[]) {
-  if (selector.constructor.name === 'Selection') {
+  // Crude way to check if `selector` is a D3 selection
+  if (typeof selector === 'object' && selector._groups && selector._parents) {
     return renderSelection(selector, data);
   }
 
