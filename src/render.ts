@@ -121,6 +121,8 @@ function addAttributes(
   for (const key in attributes) {
     const attributeValue = attributes[key];
     const value = getValue(attributeValue, state);
+    // const isEvent = key.indexOf('on')
+    // const typename = key.replace('on', '')
 
     selection.attr(camelToKebab(key), value);
   }
@@ -145,6 +147,28 @@ function addAttributes(
 
   return selection;
 }
+
+/**
+ * Add event to selection
+ * This function is a bit messy because selection.on() isn't working, perhaps
+ * something to do with transition selection. Need to use .each
+ * TODO: In progress!
+ * @param selection
+ * @param eventName
+ * @param callback
+ * @param node
+ */
+// function addEvent(selection, eventName, callback, node) {
+//   if (typeof callback === 'function') {
+//     return selection;
+//   }
+
+//   return selection.each(function() {
+//     d3.select(this).on(eventName, function(d, i) {
+//       callback(d3.event, d, i, node);
+//     });
+//   });
+// }
 
 function addStyles(selection, styles: ElementStyles, state: TransitionState) {
   for (const key in styles) {
