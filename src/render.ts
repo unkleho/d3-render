@@ -3,12 +3,19 @@ import 'd3-transition';
 
 type ElementDatum = {
   append: string;
-  children?: ElementDatum[] | undefined;
+  children?: ElementDatum[];
   duration?: number | Function;
   delay?: number | Function;
   ease?: Function;
-  [key: string]: number | string | object | Function | null | undefined;
+  style?: ElementStyles;
+  [key: string]: number | string | object | Function;
 };
+
+type ElementStyles = {
+  [key: string]: number | string | object | Function;
+};
+
+type TransitionState = 'enter' | 'exit';
 
 // type Selector = string | Node;
 
@@ -83,39 +90,36 @@ function renderSelection(selection, data: ElementDatum[], level = 0) {
   );
 }
 
-function addAttributes(selection, data, state) {
+function addAttributes(selection, datum: ElementDatum, state: TransitionState) {
   // Assume anything other than key, text, onClick etc are attributes
   // TODO: Will need to keep adding to this list
   const {
     append,
     key,
     text,
-    onClick,
+    style,
     children,
     duration,
     delay,
     ease,
+    onClick,
     ...attributes
-  } = data;
+  } = datum;
 
   // Rather than hand coding every attribute, we loop over the attributes object
   for (const key in attributes) {
-    let value;
     const attributeValue = attributes[key];
+    const value = getValue(attributeValue, state);
 
-    // Every attribute value can have an optional exit/enter value
-    // We just check if value is an object eg. { exit: 0, enter: 100 }
-    if (typeof attributeValue === 'object') {
-      value = attributeValue[state];
-    } else {
-      value = attributeValue;
-    }
-
-    selection.attr(key, value);
+    selection.attr(camelToKebab(key), value);
   }
 
-  if (data.text) {
-    selection.text(data.text);
+  if (datum.text) {
+    selection.text(datum.text);
+  }
+
+  if (datum.style) {
+    selection = addStyles(selection, datum.style, state);
   }
 
   // Can't do selection.on('click') for some stoopid reason, need to use .each
@@ -131,10 +135,21 @@ function addAttributes(selection, data, state) {
   return selection;
 }
 
+function addStyles(selection, styles: ElementStyles, state: TransitionState) {
+  for (const key in styles) {
+    const styleValue = styles[key];
+    const value = getValue(styleValue, state);
+
+    selection.style(camelToKebab(key), value);
+  }
+
+  return selection;
+}
+
 function addTransition(
   selection,
   datum: ElementDatum = { append: null },
-  state = 'enter'
+  state: TransitionState = 'enter'
 ) {
   let transition = selection
     .transition()
@@ -162,7 +177,15 @@ function getDuration(d) {
   return d.duration;
 }
 
-function getValue(value, state) {
+/**
+ * Get value from ElementDatum key, process and pass to selection.attr(),
+ * selection.transition() or selection.style()
+ * Every value can have an optional exit/enter value
+ * We just check if value is an object eg. { exit: 0, enter: 100 }
+ * @param value
+ * @param state
+ */
+function getValue(value, state: TransitionState): number | string | Function {
   if (typeof value === 'object') {
     return value[state];
   }
@@ -170,6 +193,6 @@ function getValue(value, state) {
   return value;
 }
 
-// function camelToKebab(string) {
-//   return string.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1-$2').toLowerCase();
-// }
+function camelToKebab(string: string): string {
+  return string.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1-$2').toLowerCase();
+}

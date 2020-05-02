@@ -7,9 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.2.0] - 2020-05-XX
 
-- Remove `d3` as peerDependency
-- Add `d3-selection` and `d3-transition` as dependency
+- Remove `d3` as peerDependency to reduce bundle sizes
+- Add `d3-selection` and `d3-transition` as peerDependency
 - Remove export of `renderSelection`, but allow `render` to accept D3 `Selection` as selector
+- Enable `camelCase` keys in `data` elements, eg. `fillOpacity` rather than `'fill-opacity'`
+- Enable `style` key in `data` elements, calling `selection.style()` behind the scenes
 
 ## [0.1.5] - 2020-04-29
 

@@ -106,10 +106,37 @@ function selectionTest() {
       y: 8,
       'font-size': 8,
     },
+    {
+      append: 'text',
+      text: 'Test fillOpacity',
+      fillOpacity: '0.5',
+      y: 24,
+      'font-size': 8,
+    },
   ]);
 }
 
 selectionTest();
+
+/**
+ * Selection Test
+ * Check if `render` can accept a D3 selection
+ */
+function styleTest() {
+  render('#style-test', [
+    {
+      append: 'rect',
+      width: 50,
+      height: 50,
+      fill: 'black',
+      style: {
+        fillOpacity: 0.5,
+      },
+    },
+  ]);
+}
+
+styleTest();
 
 /**
  * Render Chain Test
