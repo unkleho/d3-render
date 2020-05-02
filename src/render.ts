@@ -19,6 +19,11 @@ type TransitionState = 'enter' | 'exit';
 
 // type Selector = string | Node;
 
+/**
+ * Using D3, this function renders elements based on declarative `data`, effectively replacing `select`, `append`, `data`, `join`, `enter`, `exit`, `transition` and more.
+ * @param selector
+ * @param data
+ */
 export default function render(selector, data: ElementDatum[]) {
   if (selector.constructor.name === 'Selection') {
     return renderSelection(selector, data);
@@ -29,6 +34,9 @@ export default function render(selector, data: ElementDatum[]) {
   return renderSelection(selection, data);
 }
 
+/**
+ * Recursively renders elements based on `data`, which can be deeply nested with the `children` key.
+ */
 function renderSelection(selection, data: ElementDatum[], level = 0) {
   return (
     selection
@@ -54,12 +62,15 @@ function renderSelection(selection, data: ElementDatum[], level = 0) {
 
               // Add initial attributes. For now, initial and exit values are the same
               d3.select(this).call(selection =>
-                addAttributes(selection, d, 'exit', this)
+                addAttributes(selection, d, 'exit')
               );
+
+              // Add events to element eg. onClick
+              d3.select(this).call(selection => addEvents(selection, d));
 
               // Add enter transitions
               d3.select(this).call(selection =>
-                addTransition(selection, d, 'enter', this)
+                addTransition(selection, d, 'enter')
               );
 
               // Recursively run again, passing in each child in selection
@@ -69,7 +80,7 @@ function renderSelection(selection, data: ElementDatum[], level = 0) {
         update => {
           return update.each(function(d) {
             d3.select(this).call(selection =>
-              addTransition(selection, d, 'enter', this)
+              addTransition(selection, d, 'enter')
             );
 
             renderSelection(d3.select(this), d.children, level + 1);
@@ -81,7 +92,7 @@ function renderSelection(selection, data: ElementDatum[], level = 0) {
 
           // NOTE: This doesn't seem to work, but '*' above will do for now
           // exit.each(function(d) {
-          //   createElements(d3.select(this), d, level + 1);
+          //   renderSelection(d3.select(this), d, level + 1);
           // });
 
           return exit.each(exitTransition);
@@ -99,13 +110,10 @@ function renderSelection(selection, data: ElementDatum[], level = 0) {
 function addAttributes(
   selection,
   datum: ElementDatum,
-  state: TransitionState,
-  node = null
+  state: TransitionState
+  // node = null
 ) {
-  // console.log(node);
-
-  // Assume anything other than key, text, onClick etc are attributes
-  // TODO: Will need to keep adding to this list
+  // Assume anything other than key, text etc are attributes
   const {
     append,
     key,
@@ -115,14 +123,6 @@ function addAttributes(
     duration,
     delay,
     ease,
-    onClick,
-    // onMouseDown,
-    // onMouseMove,
-    // onMouseOut,
-    // onMouseOver,
-    // onMouseUp,
-    // onMouseWheel,
-    // onWheel,
     ...attributes
   } = datum;
 
@@ -130,10 +130,12 @@ function addAttributes(
   for (const key in attributes) {
     const attributeValue = attributes[key];
     const value = getValue(attributeValue, state);
-    // const isEvent = key.indexOf('on')
-    // const typename = key.replace('on', '')
+    const isEvent = key.indexOf('on') === 0;
 
-    selection.attr(camelToKebab(key), value);
+    // Skip any on* events, we'll handle them in addEvents
+    if (!isEvent) {
+      selection.attr(camelToKebab(key), value);
+    }
   }
 
   if (datum.text) {
@@ -144,41 +146,43 @@ function addAttributes(
     selection = addStyles(selection, datum.style, state);
   }
 
-  // Can't do selection.on('click') for some stoopid reason, need to use .each
-  selection.each(function(d) {
-    if (typeof d.onClick === 'function') {
-      d3.select(this).on('click', function(d, i) {
-        // @ts-ignore
-        d.onClick(d3.event, d, i, node);
-      });
+  return selection;
+}
+
+/**
+ * Add event to selection element
+ * @param selection
+ * @param datum
+ */
+function addEvents(selection, datum) {
+  // Loop throught all keys in datum
+  for (const key in datum) {
+    const isEvent = key.indexOf('on') === 0;
+
+    // Only allow keys with on*
+    if (isEvent) {
+      const callback = datum[key];
+
+      // Check that the value is a callback function
+      if (typeof callback === 'function') {
+        const eventName = key.replace('on', '').toLowerCase();
+
+        selection.on(eventName, function(d, i) {
+          return callback(d3.event, d, i);
+        });
+      }
     }
-  });
+  }
 
   return selection;
 }
 
 /**
- * Add event to selection
- * This function is a bit messy because selection.on() isn't working, perhaps
- * something to do with transition selection. Need to use .each
- * TODO: In progress!
+ * Adds inline styles to the element
  * @param selection
- * @param eventName
- * @param callback
- * @param node
+ * @param styles
+ * @param state
  */
-// function addEvent(selection, eventName, callback, node) {
-//   if (typeof callback === 'function') {
-//     return selection;
-//   }
-
-//   return selection.each(function() {
-//     d3.select(this).on(eventName, function(d, i) {
-//       callback(d3.event, d, i, node);
-//     });
-//   });
-// }
-
 function addStyles(selection, styles: ElementStyles, state: TransitionState) {
   for (const key in styles) {
     const styleValue = styles[key];
@@ -190,11 +194,17 @@ function addStyles(selection, styles: ElementStyles, state: TransitionState) {
   return selection;
 }
 
+/**
+ * Add transition to element, animating to a particular `state` by updating
+ * selection with `addAttributes`
+ * @param selection
+ * @param datum
+ * @param state
+ */
 function addTransition(
   selection,
   datum: ElementDatum = { append: null },
-  state: TransitionState = 'enter',
-  node = null
+  state: TransitionState = 'enter'
 ) {
   let transition = selection
     .transition()
@@ -211,7 +221,7 @@ function addTransition(
 
   return selection
     .transition(transition)
-    .call(selection => addAttributes(selection, datum, state, node));
+    .call(selection => addAttributes(selection, datum, state));
 }
 
 function exitTransition(d) {
@@ -238,6 +248,10 @@ function getValue(value, state: TransitionState): number | string | Function {
   return value;
 }
 
+/**
+ * Convert camelCase to kebab-case for JavaScript to HTML/CSS interop
+ * @param string
+ */
 function camelToKebab(string: string): string {
   return string.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1-$2').toLowerCase();
 }

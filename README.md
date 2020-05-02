@@ -173,9 +173,9 @@ Below is a list of important element keys:
 | `style`                                                              | An object with style property keys and values. Keys are camel cased. eg. `style: { fillOpacity: 0.5 }`. Runs `selection.style()` in the background.                                                                                                                                                                                                                                    |
 | `duration`                                                           | Number in milliseconds. Activates a D3 transition, setting the time it takes for the element to enter, update or exit. Calls `selection.transition().duration(myDuration)`.                                                                                                                                                                                                            |
 | `delay`                                                              | Number in milliseconds. Delays the start of the transition.                                                                                                                                                                                                                                                                                                                            |
-| `ease`                                                               | Sets the easing function for D3 transition. Use any D3 easing function [here](https://github.com/d3/d3-ease). eg. `{ append: 'rect', ease: d3.easeQuadInOut`                                                                                                                                                                                                                           |
+| `ease`                                                               | Sets the easing function for D3 transition. Use any D3 easing function [here](https://github.com/d3/d3-ease). eg. `{ append: 'rect', ease: d3.easeQuadInOut }`                                                                                                                                                                                                                         |
 | `children`                                                           | Array of element objects, which will be nested under the current element.                                                                                                                                                                                                                                                                                                              |
-| `onClick`                                                            | Function to call when element is clicked or tapped. More interactive callbacks to come.                                                                                                                                                                                                                                                                                                |
+| `onClick`, `onMouseOver`, `onMouseOut`, supports any `on*` event     | A function for element event. Function can be used like this: `{ onClick: (event, data, index) => {} }`                                                                                                                                                                                                                                                                                |
 
 \* Required
 
@@ -299,6 +299,44 @@ When the `rect` is removed from `data`, the exit transition kicks in, animating 
 
 The `{ enter, exit }` animation object is a powerful pattern that can be applied to **any** attribute in the element.
 
+### Event Handlers
+
+An event handler for the element can be defined along with the rest of the attributes.
+
+```js
+render('#root', [
+  {
+    append: 'circle',
+    r: 50,
+    cx: 50,
+    cy: 50,
+    // Circle can call function when it is clicked or tapped
+    onClick: (event, datum, index) => {},
+    // Or when the mouse is over
+    onMouseOver: (event, datum, index) => {},
+  },
+]);
+```
+
+Any `on*` event can be used eg. `onDrag`, `onScroll`, `onWheel` etc. D3 Render maps the declared event function to `selection.on()`.
+
+### Inline Styles
+
+An element can be styled inline with the `style` key and a `style` object value. Style properties must be in camel case.
+
+```js
+render('#root', [
+  {
+    append: 'rect',
+    width: 50,
+    height: 50,
+    style: {
+      fillOpacity: 0.5,
+    },
+  },
+]);
+```
+
 ### React Example
 
 D3 Render is actually inspired by React's declarative mental model, so it is no suprise that integration between the two is quite simple:
@@ -342,7 +380,7 @@ const App = () => {
 ### Documentation
 
 - [ ] Add animated gifs
-- [ ] Interactivity example
+- [x] Interactivity example
 - [ ] Nesting with `children` example
 - [ ] Component example
 - [ ] Data `key` example
@@ -355,7 +393,7 @@ const App = () => {
 - [x] Merge `render` and `renderSelection` into one function
 - [x] Add `style` attribute key
 - [x] Use camelCased element keys and then convert to snake-case for selection.attr()
-- [ ] Add more on\* events
+- [x] Add more on\* events
 - [x] Try `selection.prototype = render` for `d3.render()` to work
 - [ ] Enable HTML element appends
 - [ ] Add tests

@@ -77,7 +77,15 @@ function enterTest() {
   const data = [
     {
       append: 'rect',
-      width: { enter: 50, exit: 0 },
+      width: {
+        enter: 50,
+        // enter: (d, i, node) => {
+        //   console.log(d, i, node);
+
+        //   return 50;
+        // },
+        exit: 0,
+      },
       height: 50,
       fill: 'red',
       duration: 1000,
@@ -153,9 +161,11 @@ function onClickTest() {
       width: 50,
       height: 50,
       fill: 'orange',
-      onClick: (event, d, i, node) => {
-        // TODO: Try d3.select(this)
-        console.log(event, d, i, node);
+      onClick: (event, d, i) => {
+        console.log(event, d, i);
+      },
+      onMouseOver: (event, d, i) => {
+        console.log(event, d, i);
       },
     },
   ]);

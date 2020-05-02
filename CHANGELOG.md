@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove export of `renderSelection`, but allow `render` to accept D3 `Selection` as selector
 - Enable `camelCase` keys in `data` elements, eg. `fillOpacity` rather than `'fill-opacity'`
 - Enable `style` key in `data` elements, calling `selection.style()` behind the scenes
+- Enable any `on*` events, eg. `onClick`, `onMouseOver`
+- Remove old way of attaching events, with a cleaner method that attaches before enter transition
+- Update readme
 
 ## [0.1.5] - 2020-04-29
 

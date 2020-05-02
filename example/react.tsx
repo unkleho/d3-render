@@ -12,6 +12,11 @@ const App = () => {
       width: 50,
       height: 50,
       fill: 'green',
+      // fill: (datum, index, node) => {
+      //   console.log(datum, index, node);
+
+      //   return 'green';
+      // },
       duration: 1000,
       onClick: () => {
         setData([{ ...data[0], fill: 'yellow' }]);
