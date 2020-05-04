@@ -7,11 +7,11 @@
     <title>D3 Render Load JS from Script Test</title>
     <link href="./styles/global.scss" type="text/css" rel="stylesheet" />
     <script src="https://d3js.org/d3.v5.js"></script>
-    <script src="https://unpkg.com/d3-render@0.2.0-canary-1/dist/d3-render.umd.development.min.js"></script>
+    <script src="../dist/d3-render.umd.production.min.js"></script>
 
     <script>
-      console.log(d3);
-      // console.log(render);
+      console.log(d3.select('#append-test'));
+      // console.log(exports);
     </script>
   </head>
 

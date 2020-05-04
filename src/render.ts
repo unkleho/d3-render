@@ -38,7 +38,7 @@ export default function render(selector, data: ElementDatum[]) {
 /**
  * Recursively renders elements based on `data`, which can be deeply nested with the `children` key.
  */
-function renderSelection(selection, data: ElementDatum[], level = 0) {
+export function renderSelection(selection, data: ElementDatum[], level = 0) {
   return (
     selection
       // Cool way to select immediate children. (Totally didn't know you could do this)

@@ -1,12 +1,6 @@
 import * as d3 from 'd3';
 
-// import * as d3 from '../node_modules/d3-selection';
-// import '../node_modules/d3-transition';
-
-// console.log(d3);
-
 import render from '../';
-// import render from 'd3-render';
 
 /**
  * Append Test

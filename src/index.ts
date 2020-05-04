@@ -1,6 +1,7 @@
 import { selection } from 'd3-selection';
-import render from './render';
+import render, { renderSelection } from './render';
 
+// TODO: Attempt at chaining render
 function chainedRender(data) {
   return render(this, data);
 }
@@ -8,3 +9,4 @@ function chainedRender(data) {
 selection.prototype.render = chainedRender;
 
 export default render;
+export { renderSelection };
