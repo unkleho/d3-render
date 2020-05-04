@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>D3 Render Load JS from Script Test</title>
+    <link href="./styles/global.scss" type="text/css" rel="stylesheet" />
+    <script src="https://d3js.org/d3.v5.js"></script>
+    <script src="https://unpkg.com/d3-render@0.2.0-canary-1/dist/d3-render.umd.development.min.js"></script>
+
+    <script>
+      console.log(d3);
+      // console.log(render);
+    </script>
+  </head>
+
+  <body>
+    <h1>D3 Render Test Page</h1>
+    <div class="cluster">
+      <div>
+        <div>
+          <h2>Append</h2>
+          <svg id="append-test"></svg>
+        </div>
+
+        <div>
+          <h2>Update</h2>
+          <svg id="update-test"></svg>
+          <!-- <script src="./index.ts"></script> -->
+        </div>
+
+        <div>
+          <h2>Enter</h2>
+          <svg id="enter-test"></svg>
+          <!-- <script src="./index.ts"></script> -->
+        </div>
+
+        <div>
+          <h2>Selection</h2>
+          <svg id="selection-test"></svg>
+          <!-- <script src="./index.ts"></script> -->
+        </div>
+
+        <div>
+          <h2>Style</h2>
+          <svg id="style-test"></svg>
+          <!-- <script src="./index.ts"></script> -->
+        </div>
+
+        <div>
+          <h2>onClick</h2>
+          <svg id="on-click-test"></svg>
+          <!-- <script src="./index.ts"></script> -->
+        </div>
+
+        <!-- <div>
+          <h2>Render Chain</h2>
+          <svg id="render-chain-test"></svg>
+          <script src="./index.ts"></script>
+        </div> -->
+
+        <div>
+          <h2>Hierarchy</h2>
+          <svg id="hierarchy" style="width: 150px"></svg>
+          <!-- <script src="./hierarchy.ts"></script> -->
+        </div>
+
+        <div>
+          <h2>React</h2>
+          <div id="react"></div>
+          <!-- <script src="./react.tsx"></script> -->
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
