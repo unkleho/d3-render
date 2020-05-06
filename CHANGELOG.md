@@ -5,16 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.2.0] - 2020-05-XX
+## [0.2.1] - 2020-05-xx
 
-- Remove `d3` as peerDependency to reduce bundle sizes
-- Add `d3-selection` and `d3-transition` as peerDependency
-- Remove export of `renderSelection`, but allow `render` to accept D3 `Selection` as selector
+- Install `@testing-library/dom` and add tests to cover most uses cases
+
+## [0.2.0] - 2020-05-05
+
+- Replacec `d3` with `d3-selection` and `d3-transition` as peerDependencies to reduce bundle sizes
+- Enable `render` to accept D3 `Selection` as selector
 - Enable `camelCase` keys in `data` elements, eg. `fillOpacity` rather than `'fill-opacity'`
 - Enable `style` key in `data` elements, calling `selection.style()` behind the scenes
 - Enable any `on*` events, eg. `onClick`, `onMouseOver`
-- Remove old way of attaching events, with a cleaner method that attaches before enter transition
+- Improve `render`'s way of attaching events, with a cleaner method that attaches before enter transition
 - Update readme
+- Attempt adding `render` to D3's selection chain (not working yet)
 
 ## [0.1.5] - 2020-04-29
 

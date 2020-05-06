@@ -396,13 +396,14 @@ const App = () => {
 - [x] Add more on\* events
 - [x] Try `selection.prototype = render` for `d3.render()` to work
 - [ ] Enable HTML element appends
-- [ ] Add tests
+- [x] Add tests
 - [ ] Pass element node through function value eg. `delay: (d, i, node) => node.getTotalLength()`
 - [ ] Integrate `selection.html()`
 - [ ] Add `update` to `{ enter, exit }` transition object
 - [ ] Consider `enterStart` and `exitStart` in transition object
 - [ ] Consider `{ enter, exit }` for `ease`, `delay` and `duration`
 - [ ] Design declarative API for complex timeline based animations
+- [ ] Remove transition if no duration
 
 ## Local Development
 
