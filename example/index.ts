@@ -147,7 +147,6 @@ styleTest();
 /**
  * onClick test
  */
-
 function onClickTest() {
   render('#on-click-test', [
     {
@@ -166,6 +165,25 @@ function onClickTest() {
 }
 
 onClickTest();
+
+/**
+ * Div Test
+ */
+function divTest() {
+  render('#div-test', [
+    {
+      append: 'div',
+      width: 50,
+      height: 50,
+      style: {
+        backgroundColor: 'red',
+      },
+      text: 'I am in a div!',
+    },
+  ]);
+}
+
+divTest();
 
 /**
  * Render Chain Test

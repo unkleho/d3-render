@@ -83,3 +83,5 @@ function getNamespace(elementName) {
 
   return 'html';
 }
+
+export default getNamespace;

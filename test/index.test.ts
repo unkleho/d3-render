@@ -162,6 +162,22 @@ describe('Render', () => {
     expect(ellipse.getAttribute('rx')).toEqual('100');
     expect(rxMock).toBeCalledWith(data[0], 0);
   });
+
+  it('should render div', () => {
+    const body = getExampleDOM('body');
+    const data = [
+      {
+        append: 'div',
+        text: 'Text in div',
+      },
+    ];
+
+    render(body, data);
+    const div = body.querySelector('div');
+
+    expect(div).toBeTruthy();
+    expect(getByText(body, 'Text in div')).toBeTruthy();
+  });
 });
 
 function getKeyType(key: string) {

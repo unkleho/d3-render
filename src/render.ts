@@ -1,6 +1,8 @@
 import * as d3 from 'd3-selection';
 import 'd3-transition';
 
+import getNamespace from './getNamespace';
+
 type ElementDatum = {
   append: string;
   children?: ElementDatum[];
@@ -49,12 +51,18 @@ export function renderSelection(selection, data: ElementDatum[], level = 0) {
       .join(
         enter => {
           return enter
-            .append(d =>
+            .append(d => {
               // Yes you saw that right. Append element based on 'append' key in data.
               // Makes this whole function incredibly flexible
-              // @ts-ignore
-              document.createElementNS(d3.namespace('svg').space, d.append)
-            )
+              const namespace = getNamespace(d.append);
+
+              // https://stackoverflow.com/questions/51857699/append-shapes-dynamically-in-d3
+              return document.createElementNS(
+                // @ts-ignore
+                d3.namespace(namespace).space,
+                d.append
+              );
+            })
             .each(function(d) {
               // Hook into things like selection.call(xAxis)
               if (typeof d.call === 'function') {
