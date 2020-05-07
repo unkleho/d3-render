@@ -173,8 +173,6 @@ function divTest() {
   render('#div-test', [
     {
       append: 'div',
-      width: 50,
-      height: 50,
       style: {
         backgroundColor: 'red',
       },

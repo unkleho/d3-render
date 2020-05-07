@@ -56,6 +56,10 @@ export function renderSelection(selection, data: ElementDatum[], level = 0) {
               // Makes this whole function incredibly flexible
               const namespace = getNamespace(d.append);
 
+              if (namespace === 'html') {
+                return document.createElement(d.append);
+              }
+
               // https://stackoverflow.com/questions/51857699/append-shapes-dynamically-in-d3
               return document.createElementNS(
                 // @ts-ignore
