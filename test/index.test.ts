@@ -163,7 +163,7 @@ describe('Render', () => {
     expect(rxMock).toBeCalledWith(data[0], 0);
   });
 
-  it('should render div', () => {
+  it('should render div with text', () => {
     const body = getExampleDOM('body');
     const data = [
       {
@@ -177,6 +177,23 @@ describe('Render', () => {
 
     expect(div).toBeTruthy();
     expect(getByText(body, 'Text in div')).toBeTruthy();
+  });
+
+  it('should render div with html', () => {
+    const body = getExampleDOM('body');
+    const data = [
+      {
+        append: 'div',
+        html: '<p>Text in paragraph</p>',
+      },
+    ];
+
+    render(body, data);
+    const div = body.querySelector('div');
+    const paragraph = div.querySelector('p');
+
+    expect(paragraph).toBeTruthy();
+    expect(getByText(paragraph, 'Text in paragraph')).toBeTruthy();
   });
 });
 

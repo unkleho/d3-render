@@ -18,6 +18,11 @@ h2 {
   font-size: 1.2rem;
 }
 
+h1:first-child,
+h2:first-child {
+  margin-top: 0;
+}
+
 svg {
   width: 100px;
   height: 50px;

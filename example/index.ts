@@ -149,6 +149,20 @@ function styleTest() {
 styleTest();
 
 /**
+ * HTML Test
+ */
+function htmlTest() {
+  render('#html-test', [
+    {
+      append: 'div',
+      html: '<strong>html</strong><br/><em>test</em>',
+    },
+  ]);
+}
+
+htmlTest();
+
+/**
  * onClick test
  */
 function onClickTest() {

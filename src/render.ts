@@ -78,6 +78,11 @@ export function renderSelection(selection, data: ElementDatum[], level = 0) {
                 addAttributes(selection, d, 'exit')
               );
 
+              // Add HTML
+              if (d.html) {
+                d3.select(this).html(d.html);
+              }
+
               // Add events to element eg. onClick
               d3.select(this).call(selection => addEvents(selection, d));
 
@@ -131,6 +136,7 @@ function addAttributes(
     append,
     key,
     text,
+    html,
     style,
     children,
     duration,
