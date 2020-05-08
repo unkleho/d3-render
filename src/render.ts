@@ -228,10 +228,12 @@ function addTransition(
   let transition = selection
     .transition()
     .delay(d => getValue(d.delay, state) || 0)
-    .duration(getDuration);
+    .duration(d => getValue(d.duration, state));
 
-  if (typeof datum.ease === 'function') {
-    transition = transition.ease(t => datum.ease(t));
+  const ease = getValue(datum.ease, state);
+
+  if (typeof ease === 'function') {
+    transition = transition.ease(t => ease(t));
   }
 
   if (state === 'exit') {
@@ -247,9 +249,9 @@ function exitTransition(d) {
   d3.select(this).call(selection => addTransition(selection, d, 'exit'));
 }
 
-function getDuration(d) {
-  return d.duration;
-}
+// function getDuration(d) {
+//   return d.duration;
+// }
 
 /**
  * Get value from ElementDatum key, process and pass to selection.attr(),

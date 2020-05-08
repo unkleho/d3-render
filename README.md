@@ -387,6 +387,7 @@ const App = () => {
 - [ ] Data `key` example
 - [ ] Selection return example
 - [x] Incremental adoption example with `d3.select('svg').call(render, data)`
+- [ ] Element node access in function value eg. `delay: function(d, i) { this.getTotalLength() }`
 
 ### API
 
@@ -398,11 +399,10 @@ const App = () => {
 - [x] Try `selection.prototype = render` for `d3.render()` to work
 - [x] Enable HTML element appends
 - [x] Add tests
-- [ ] Pass element node through function value eg. `delay: (d, i, node) => node.getTotalLength()`
 - [x] Integrate `selection.html()`
 - [ ] Add `update` to `{ enter, exit }` transition object
 - [ ] Consider `enterStart` and `exitStart` in transition object
-- [ ] Consider `{ enter, exit }` for `ease`, `delay` and `duration`
+- [x] Consider `{ enter, exit }` for `ease`, `delay` and `duration`
 - [ ] Design declarative API for complex timeline based animations
 - [ ] Remove transition if no duration
 

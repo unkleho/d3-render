@@ -82,8 +82,8 @@ function enterTest() {
       },
       height: 50,
       fill: 'red',
-      duration: 1000,
-      ease: d3.easeBounceInOut,
+      duration: { enter: 1000, exit: 500 },
+      ease: { enter: d3.easeBounceOut, exit: d3.easeBounceIn },
     },
   ];
 
@@ -113,15 +113,17 @@ function selectionTest() {
     {
       append: 'text',
       text: 'render from d3.select',
-      y: 8,
-      'font-size': 8,
+      y: function() {
+        return 8;
+      },
+      fontSize: 8,
     },
     {
       append: 'text',
       text: 'Test fillOpacity',
       fillOpacity: '0.5',
       y: 24,
-      'font-size': 8,
+      fontSize: 8,
     },
   ]);
 }
