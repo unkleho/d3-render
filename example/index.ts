@@ -40,7 +40,8 @@ function updateTest() {
     {
       append: 'ellipse',
       fill: 'red',
-      rx: 50,
+      // TODO: Not quite working
+      rx: { enter: 50, update: 25, exit: 50 },
       ry: 25,
       cx: 50,
       cy: 25,

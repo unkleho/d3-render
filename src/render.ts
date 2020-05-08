@@ -17,7 +17,7 @@ type ElementStyles = {
   [key: string]: number | string | object | Function;
 };
 
-type TransitionState = 'enter' | 'exit';
+type TransitionState = 'enter' | 'exit' | 'update';
 
 // type Selector = string | Node;
 
@@ -98,7 +98,7 @@ export function renderSelection(selection, data: ElementDatum[], level = 0) {
         update => {
           return update.each(function(d) {
             d3.select(this).call(selection =>
-              addTransition(selection, d, 'enter')
+              addTransition(selection, d, 'update')
             );
 
             renderSelection(d3.select(this), d.children, level + 1);
@@ -263,7 +263,14 @@ function exitTransition(d) {
  */
 function getValue(value, state: TransitionState): number | string | Function {
   if (typeof value === 'object') {
-    return value[state];
+    const newValue = value[state];
+
+    // Default to `enter` if `update` not available
+    if (state === 'update' && !newValue) {
+      return value['enter'];
+    }
+
+    return newValue;
   }
 
   return value;
