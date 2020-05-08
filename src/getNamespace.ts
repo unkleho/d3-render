@@ -1,3 +1,7 @@
+/**
+ * Work out what element type based on element name
+ * Most commonly 'svg' or 'html'
+ */
 function getNamespace(elementName) {
   // SVG Element list from
   // https://developer.mozilla.org/en-US/docs/Web/SVG/Element
@@ -85,3 +89,134 @@ function getNamespace(elementName) {
 }
 
 export default getNamespace;
+
+// Keep this HTML element list here in case it is better to search for
+// From https://developer.mozilla.org/en-US/docs/Web/HTML/Element
+// const htmlElements = [
+//   // Document Metadata
+//   'html',
+//   'base',
+//   'head',
+//   'link',
+//   'meta',
+//   'style',
+//   'title',
+//   // Sectioning Root
+//   'body',
+//   // Content Sectioning
+//   'address',
+//   'article',
+//   'aside',
+//   'footer',
+//   'header',
+//   'h1',
+//   'h2',
+//   'h3',
+//   'h4',
+//   'h5',
+//   'h6',
+//   'hgroup',
+//   'main',
+//   'nav',
+//   'section',
+//   // Text Content
+//   'blockquote',
+//   'dd',
+//   'div',
+//   'dl',
+//   'figcaption',
+//   'figure',
+//   'hr',
+//   'li',
+//   'main',
+//   'ol',
+//   'p',
+//   'pre',
+//   'ul',
+//   // Inline Text Semantics
+//   'a',
+//   'abbr',
+//   'b',
+//   'bdi',
+//   'bdo',
+//   'br',
+//   'cite',
+//   'code',
+//   'data',
+//   'dfn',
+//   'em',
+//   'i',
+//   'kbd',
+//   'mark',
+//   'q',
+//   'rb',
+//   'rp',
+//   'rt',
+//   'rtc',
+//   'ruby',
+//   's',
+//   'samp',
+//   'small',
+//   'span',
+//   'strong',
+//   'sub',
+//   'sup',
+//   'time',
+//   'u',
+//   'var',
+//   'wbr',
+//   // Image and Multimedia
+//   'area',
+//   'audio',
+//   'img',
+//   'map',
+//   'track',
+//   'video',
+//   'embed',
+//   'iframe',
+//   'object',
+//   'param',
+//   'picture',
+//   'source',
+//   // Scripting
+//   'canvas',
+//   'noscript',
+//   'script',
+//   // Demarcating Edits
+//   'del',
+//   'ins',
+//   // Table Content
+//   'caption',
+//   'col',
+//   'colgroup',
+//   'table',
+//   'tbody',
+//   'td',
+//   'tfoot',
+//   'th',
+//   'thead',
+//   'tr',
+//   // Forms
+//   'button',
+//   'datalist',
+//   'fieldset',
+//   'form',
+//   'input',
+//   'label',
+//   'legend',
+//   'meter',
+//   'optgroup',
+//   'option',
+//   'output',
+//   'progress',
+//   'select',
+//   'textarea',
+//   // Interactive Elements
+//   'details',
+//   'dialog',
+//   'menu',
+//   'summary',
+//   // Web Components
+//   'slot',
+//   'template',
+// ];

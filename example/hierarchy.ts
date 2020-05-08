@@ -148,8 +148,11 @@ const hierarchy2 = d3.hierarchy({
 
 let i = 0;
 
-setInterval(() => {
-  graph(i % 2 ? hierarchy1 : hierarchy2);
-
-  i++;
+const interval = setInterval(() => {
+  if (i < 11) {
+    graph(i % 2 ? hierarchy1 : hierarchy2);
+    i++;
+  } else {
+    clearInterval(interval);
+  }
 }, 3000);

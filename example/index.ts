@@ -89,10 +89,14 @@ function enterTest() {
 
   let i = 0;
 
-  setInterval(() => {
-    render('#enter-test', i % 2 ? [] : data);
+  const interval = setInterval(() => {
+    if (i < 11) {
+      render('#enter-test', i % 2 ? [] : data);
 
-    i++;
+      i++;
+    } else {
+      clearInterval(interval);
+    }
   }, 2000);
 }
 
@@ -182,6 +186,21 @@ function divTest() {
 }
 
 divTest();
+
+/**
+ * Button Test
+ */
+function buttonTest(counter = 0) {
+  render('#button-test', [
+    {
+      append: 'button',
+      text: `Clicked ${counter} times`,
+      onClick: () => buttonTest(counter++),
+    },
+  ]);
+}
+
+buttonTest();
 
 /**
  * Render Chain Test
