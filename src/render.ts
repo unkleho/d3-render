@@ -10,14 +10,21 @@ type ElementDatum = {
   delay?: number | Function;
   ease?: Function;
   style?: ElementStyles;
-  [key: string]: number | string | object | Function;
+  [key: string]: number | string | Function | object;
 };
 
 type ElementStyles = {
-  [key: string]: number | string | object | Function;
+  [key: string]: number | string | Function | object;
 };
 
-type TransitionState = 'enter' | 'exit' | 'update';
+type TransitionState = 'start' | 'enter' | 'exit';
+
+// TODO: Causes type errors on style and children
+// type TransitionObject = {
+//   start?: number | string | Function;
+//   enter: number | string | Function;
+//   exit?: number | string | Function;
+// };
 
 // type Selector = string | Node;
 
@@ -75,7 +82,7 @@ export function renderSelection(selection, data: ElementDatum[], level = 0) {
 
               // Add initial attributes. For now, initial and exit values are the same
               d3.select(this).call(selection =>
-                addAttributes(selection, d, 'exit')
+                addAttributes(selection, d, 'start')
               );
 
               // Add HTML
@@ -91,6 +98,10 @@ export function renderSelection(selection, data: ElementDatum[], level = 0) {
                 addTransition(selection, d, 'enter')
               );
 
+              // d3.select(this).call(selection =>
+              //   addEvents(selection, d, 'onTransition')
+              // );
+
               // Recursively run again, passing in each child in selection
               renderSelection(d3.select(this), d.children, level + 1);
             });
@@ -98,7 +109,7 @@ export function renderSelection(selection, data: ElementDatum[], level = 0) {
         update => {
           return update.each(function(d) {
             d3.select(this).call(selection =>
-              addTransition(selection, d, 'update')
+              addTransition(selection, d, 'enter')
             );
 
             renderSelection(d3.select(this), d.children, level + 1);
@@ -173,10 +184,10 @@ function addAttributes(
  * @param selection
  * @param datum
  */
-function addEvents(selection, datum) {
+function addEvents(selection, datum, onPrefix = 'on') {
   // Loop throught all keys in datum
   for (const key in datum) {
-    const isEvent = key.indexOf('on') === 0;
+    const isEvent = key.indexOf(onPrefix) === 0;
 
     // Only allow keys with on*
     if (isEvent) {
@@ -184,7 +195,7 @@ function addEvents(selection, datum) {
 
       // Check that the value is a callback function
       if (typeof callback === 'function') {
-        const eventName = key.replace('on', '').toLowerCase();
+        const eventName = key.replace(onPrefix, '').toLowerCase();
 
         selection.on(eventName, function(d, i) {
           return callback(d3.event, d, i);
@@ -265,9 +276,9 @@ function getValue(value, state: TransitionState): number | string | Function {
   if (typeof value === 'object') {
     const newValue = value[state];
 
-    // Default to `enter` if `update` not available
-    if (state === 'update' && !newValue) {
-      return value['enter'];
+    // Default to `exit` if `start` value not available
+    if (state === 'start' && isEmpty(newValue)) {
+      return value['exit'];
     }
 
     return newValue;
@@ -282,4 +293,8 @@ function getValue(value, state: TransitionState): number | string | Function {
  */
 function camelToKebab(string: string): string {
   return string.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1-$2').toLowerCase();
+}
+
+function isEmpty(value) {
+  return value == null;
 }

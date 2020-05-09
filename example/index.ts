@@ -41,7 +41,8 @@ function updateTest() {
       append: 'ellipse',
       fill: 'red',
       // TODO: Not quite working
-      rx: { enter: 50, update: 25, exit: 50 },
+      // rx: { enter: 50, start: 25, exit: 50 },
+      rx: 50,
       ry: 25,
       cx: 50,
       cy: 25,
@@ -73,18 +74,21 @@ function enterTest() {
     {
       append: 'rect',
       width: {
+        start: 0,
         enter: 50,
-        // enter: (d, i, node) => {
-        //   console.log(d, i, node);
-
-        //   return 50;
-        // },
+        exit: 50,
+      },
+      height: {
+        start: 50,
+        enter: 50,
         exit: 0,
       },
-      height: 50,
-      fill: 'red',
+      fill: { start: 'yellow', enter: 'red', exit: 'purple' },
       duration: { enter: 1000, exit: 500 },
       ease: { enter: d3.easeBounceOut, exit: d3.easeBounceIn },
+      onTransitionStart: () => {
+        return 'Start';
+      },
     },
   ];
 
