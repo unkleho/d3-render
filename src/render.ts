@@ -6,13 +6,14 @@ import getNamespace from './getNamespace';
 type ElementDatum = {
   append: string;
   children?: ElementDatum[];
-  duration?: number | Function;
-  delay?: number | Function;
-  ease?: Function;
+  duration?: number | Function | object;
+  delay?: number | Function | object;
+  ease?: Function | object;
   style?: ElementStyles;
-  [key: string]: number | string | Function | object;
-  // [key: string]: number | string | Function | TransitionObject;
+  [key: string]: ElementValue;
 };
+
+type ElementValue = number | string | Function | object;
 
 type ElementStyles = {
   [key: string]: number | string | Function | object;
@@ -257,10 +258,6 @@ function addTransition(
 function exitTransition(d) {
   d3.select(this).call(selection => addTransition(selection, d, 'exit'));
 }
-
-// function getDuration(d) {
-//   return d.duration;
-// }
 
 /**
  * Get value from ElementDatum key, process and pass to selection.attr(),
