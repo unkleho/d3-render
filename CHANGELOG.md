@@ -7,7 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.2.1] - 2020-05-xx
 
+- Enable HTML elements to be appended
 - Install `@testing-library/dom` and add tests to cover most uses cases
+- Add `start` key to transition object for initial transition value
+- Add transition object to `duration` and `ease` for more enter/exit animation control
+- Add `html` key
 
 ## [0.2.0] - 2020-05-05
 

@@ -401,7 +401,7 @@ const App = () => {
 - [x] Add tests
 - [x] Integrate `selection.html()`
 - [ ] Add `update` to `{ enter, exit }` transition object
-- [ ] Consider `enterStart` and `exitStart` in transition object
+- [x] Consider `start` in transition object
 - [x] Consider `{ enter, exit }` for `ease`, `delay` and `duration`
 - [ ] Design declarative API for complex timeline based animations
 - [ ] Remove transition if no duration

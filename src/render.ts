@@ -11,6 +11,7 @@ type ElementDatum = {
   ease?: Function;
   style?: ElementStyles;
   [key: string]: number | string | Function | object;
+  // [key: string]: number | string | Function | TransitionObject;
 };
 
 type ElementStyles = {
@@ -75,44 +76,41 @@ export function renderSelection(selection, data: ElementDatum[], level = 0) {
               );
             })
             .each(function(d) {
+              const element = d3.select(this);
+
               // Hook into things like selection.call(xAxis)
               if (typeof d.call === 'function') {
-                d.call(d3.select(this), d);
+                d.call(element, d);
               }
 
               // Add initial attributes. For now, initial and exit values are the same
-              d3.select(this).call(selection =>
-                addAttributes(selection, d, 'start')
-              );
+              element.call(selection => addAttributes(selection, d, 'start'));
 
               // Add HTML
               if (d.html) {
-                d3.select(this).html(d.html);
+                element.html(d.html);
               }
 
               // Add events to element eg. onClick
-              d3.select(this).call(selection => addEvents(selection, d));
+              element.call(selection => addEvents(selection, d));
 
               // Add enter transitions
-              d3.select(this).call(selection =>
-                addTransition(selection, d, 'enter')
-              );
+              element.call(selection => addTransition(selection, d, 'enter'));
 
-              // d3.select(this).call(selection =>
+              // element.call(selection =>
               //   addEvents(selection, d, 'onTransition')
               // );
 
               // Recursively run again, passing in each child in selection
-              renderSelection(d3.select(this), d.children, level + 1);
+              renderSelection(element, d.children, level + 1);
             });
         },
         update => {
           return update.each(function(d) {
-            d3.select(this).call(selection =>
-              addTransition(selection, d, 'enter')
-            );
+            const element = d3.select(this);
+            element.call(selection => addTransition(selection, d, 'enter'));
 
-            renderSelection(d3.select(this), d.children, level + 1);
+            renderSelection(element, d.children, level + 1);
           });
         },
         exit => {

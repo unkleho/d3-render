@@ -86,9 +86,10 @@ function enterTest() {
       fill: { start: 'yellow', enter: 'red', exit: 'purple' },
       duration: { enter: 1000, exit: 500 },
       ease: { enter: d3.easeBounceOut, exit: d3.easeBounceIn },
-      onTransitionStart: () => {
-        return 'Start';
-      },
+      // TODO: Get this working!
+      // onTransitionStart: () => {
+      //   return 'Start';
+      // },
     },
   ];
 
@@ -211,12 +212,16 @@ divTest();
 /**
  * Button Test
  */
-function buttonTest(counter = 0) {
+let buttonCounter = 0;
+function buttonTest() {
   render('#button-test', [
     {
       append: 'button',
-      text: `Clicked ${counter} times`,
-      onClick: () => buttonTest(counter++),
+      text: `Clicked ${buttonCounter} times`,
+      onClick: () => {
+        buttonCounter++;
+        buttonTest();
+      },
     },
   ]);
 }
