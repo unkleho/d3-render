@@ -5,7 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.2.1] - 2020-05-xx
+## [0.2.2] - 2020-05-16
+
+- Fix issues with empty `data` or `data` with `null` values
+
+## [0.2.1] - 2020-05-10
 
 - Enable HTML elements to be appended
 - Install `@testing-library/dom` and add tests to cover most uses cases

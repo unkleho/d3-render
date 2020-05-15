@@ -50,13 +50,21 @@ export default function render(selector, data: ElementDatum[]) {
  * Recursively renders elements based on `data`, which can be deeply nested with the `children` key.
  */
 export function renderSelection(selection, data: ElementDatum[], level = 0) {
+  if (!Boolean(data)) {
+    return selection;
+  }
+
   return (
     selection
       // Cool way to select immediate children. (Totally didn't know you could do this)
       .selectAll((_, i, nodes) => {
         return nodes[i].children;
       })
-      .data(data, (d, i) => d.key || i)
+      .data(
+        // Ensure all data elements are okay
+        data.filter(d => Boolean(d)),
+        (d, i) => d?.key || i
+      )
       .join(
         enter => {
           return enter
@@ -232,9 +240,15 @@ function addStyles(selection, styles: ElementStyles, state: TransitionState) {
  */
 function addTransition(
   selection,
-  datum: ElementDatum = { append: null },
+  datum: ElementDatum,
   state: TransitionState = 'enter'
 ) {
+  // console.log(datum, state);
+
+  if (!Boolean(datum)) {
+    return selection;
+  }
+
   let transition = selection
     .transition()
     .delay(d => getValue(d.delay, state) || 0)

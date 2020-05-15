@@ -22,6 +22,7 @@
     "start": "tsdx watch --format cjs,esm,umd",
     "build": "tsdx build --format cjs,esm,umd",
     "test": "tsdx test",
+    "test:watch": "tsdx test --watch",
     "lint": "tsdx lint",
     "prepare": "tsdx build --format cjs,esm,umd"
   },

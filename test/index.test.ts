@@ -195,6 +195,18 @@ describe('Render', () => {
     expect(paragraph).toBeTruthy();
     expect(getByText(paragraph, 'Text in paragraph')).toBeTruthy();
   });
+
+  it('should render data with null values', () => {
+    const body = getExampleDOM('body');
+    const data = [null];
+
+    // @ts-ignore
+    render(body, data);
+    // const div = body.querySelector('div');
+    // const paragraph = div.querySelector('p');
+
+    expect(body).toBeTruthy();
+  });
 });
 
 function getKeyType(key: string) {
