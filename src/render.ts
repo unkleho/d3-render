@@ -89,7 +89,7 @@ export function renderSelection(selection, data: ElementDatum[], level = 0) {
 
               // Hook into things like selection.call(xAxis)
               if (typeof d.call === 'function') {
-                d.call(element, d);
+                d.call(element);
               }
 
               // Add initial attributes. For now, initial and exit values are the same
@@ -152,6 +152,7 @@ function addAttributes(
   // Assume anything other than key, text etc are attributes
   const {
     append,
+    call,
     key,
     text,
     html,
