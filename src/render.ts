@@ -10,6 +10,7 @@ type ElementDatum = {
   delay?: number | Function | object;
   ease?: Function | object;
   style?: ElementStyles;
+  call?: Function;
   [key: string]: ElementValue;
 };
 
