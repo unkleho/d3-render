@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.2.2] - 2020-05-16
 
 - Fix issues with empty `data` or `data` with `null` values
+- Add `call` key, with test and example
 
 ## [0.2.1] - 2020-05-10
 
