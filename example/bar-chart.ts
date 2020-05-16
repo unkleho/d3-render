@@ -32,16 +32,7 @@ const barChart = (data = [], { width = 100, height = 50 } = {}) => {
     g
       .attr('transform', `translate(${margin.left},0)`)
       .call(d3.axisLeft(y).ticks(2, 's'))
-      .call(selection => selection.select('.domain').remove())
-      .call(selection =>
-        selection
-          .append('text')
-          .attr('x', -margin.left)
-          .attr('y', 10)
-          .attr('fill', 'currentColor')
-          .attr('text-anchor', 'start')
-          .text(data.y)
-      );
+      .call(selection => selection.select('.domain').remove());
 
   const svg = d3.select('#bar-chart');
 
@@ -59,21 +50,34 @@ const barChart = (data = [], { width = 100, height = 50 } = {}) => {
         };
       }),
     },
+    {
+      append: 'g',
+      transform: `translate(0, ${height - margin.bottom})`,
+      call: xAxis,
+    },
+    {
+      append: 'g',
+      call: yAxis,
+    },
   ]);
 
   // Render order is important. If axis are called before render,
   // things get weird
-  svg
-    .append('g')
-    .attr('transform', `translate(0, ${height - margin.bottom})`)
-    .call(xAxis);
+  // svg
+  //   .append('g')
+  //   .attr('transform', `translate(0, ${height - margin.bottom})`)
+  //   .call(xAxis);
 
-  svg.append('g').call(yAxis);
+  // svg.append('g').call(yAxis);
 };
 
 barChart([
   {
-    word: 'Test',
+    word: 'A',
     count: 100,
+  },
+  {
+    word: 'B',
+    count: 80,
   },
 ]);

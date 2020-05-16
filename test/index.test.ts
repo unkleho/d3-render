@@ -207,6 +207,23 @@ describe('Render', () => {
 
     expect(body).toBeTruthy();
   });
+
+  it('should render data with a call function', () => {
+    const mockCall = jest.fn();
+    const svg = getExampleDOM('svg');
+    const data = [
+      {
+        append: 'g',
+        call: mockCall,
+      },
+    ];
+
+    render(svg, data);
+    const g = svg.querySelector('g');
+
+    expect(g).toBeTruthy();
+    expect(mockCall).toBeCalledWith({ _groups: [[g]], _parents: [null] });
+  });
 });
 
 function getKeyType(key: string) {
