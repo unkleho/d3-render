@@ -4,7 +4,7 @@
     "name": "Kaho Cheung",
     "url": "https://github.com/unkleho"
   },
-  "version": "0.2.1",
+  "version": "0.2.3",
   "license": "MIT",
   "module": "dist/d3-render.esm.js",
   "unpkg": "dist/d3-render.umd.production.min.js",
