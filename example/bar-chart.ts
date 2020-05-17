@@ -47,6 +47,7 @@ const barChart = (data = [], { width = 100, height = 50 } = {}) => {
           y: y(d.count),
           width: x.bandwidth(),
           height: y(0) - y(d.count),
+          duration: 1000,
         };
       }),
     },
@@ -60,18 +61,11 @@ const barChart = (data = [], { width = 100, height = 50 } = {}) => {
       call: yAxis,
     },
   ]);
-
-  // Render order is important. If axis are called before render,
-  // things get weird
-  // svg
-  //   .append('g')
-  //   .attr('transform', `translate(0, ${height - margin.bottom})`)
-  //   .call(xAxis);
-
-  // svg.append('g').call(yAxis);
 };
 
-barChart([
+let i = 0;
+
+const data1 = [
   {
     word: 'A',
     count: 100,
@@ -80,4 +74,24 @@ barChart([
     word: 'B',
     count: 80,
   },
-]);
+];
+
+const data2 = [
+  {
+    word: 'A',
+    count: 20,
+  },
+  {
+    word: 'B',
+    count: 50,
+  },
+];
+
+barChart(data1);
+
+setInterval(() => {
+  if (i <= 10) {
+    barChart(i % 2 ? data2 : data1);
+    i++;
+  }
+}, 2000);

@@ -20,7 +20,7 @@ type ElementStyles = {
   [key: string]: number | string | Function | object;
 };
 
-type TransitionState = 'start' | 'enter' | 'exit';
+type TransitionState = 'start' | 'enter' | 'update' | 'exit';
 
 // TODO: Causes type errors on style and children
 // type TransitionObject = {
@@ -118,7 +118,7 @@ export function renderSelection(selection, data: ElementDatum[], level = 0) {
         update => {
           return update.each(function(d) {
             const element = d3.select(this);
-            element.call(selection => addTransition(selection, d, 'enter'));
+            element.call(selection => addTransition(selection, d, 'update'));
 
             renderSelection(element, d.children, level + 1);
           });
@@ -245,18 +245,19 @@ function addTransition(
   datum: ElementDatum,
   state: TransitionState = 'enter'
 ) {
-  // console.log(datum, state);
+  const duration = getValue(datum.duration, state);
 
   if (!Boolean(datum)) {
     return selection;
   }
 
+  const delay = getValue(datum.delay, state) || 0;
+  const ease = getValue(datum.ease, state);
+
   let transition = selection
     .transition()
-    .delay(d => getValue(d.delay, state) || 0)
-    .duration(d => getValue(d.duration, state));
-
-  const ease = getValue(datum.ease, state);
+    .delay(delay)
+    .duration(duration);
 
   if (typeof ease === 'function') {
     transition = transition.ease(t => ease(t));
@@ -288,8 +289,14 @@ function getValue(value, state: TransitionState): number | string | Function {
     const newValue = value[state];
 
     // Default to `exit` if `start` value not available
+    // Assume that element will start the same way it exits
     if (state === 'start' && isEmpty(newValue)) {
       return value['exit'];
+    }
+
+    // Default to `enter` if `update` value not available
+    if (state === 'update' && isEmpty(newValue)) {
+      return value['enter'];
     }
 
     return newValue;

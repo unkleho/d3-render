@@ -67,6 +67,52 @@ function updateTest() {
 updateTest();
 
 /**
+ * Enter, Update, Exit Test
+ */
+function enterUpdateExitTest() {
+  const startData = [];
+
+  const enterData = [
+    {
+      append: 'rect',
+      fill: 'orange',
+      x: 0,
+      width: { start: 0, enter: 50 },
+      height: 50,
+      duration: 200,
+    },
+  ];
+
+  const updateData = [
+    {
+      append: 'rect',
+      fill: 'green',
+      x: { enter: 50, exit: 100 },
+      width: { enter: 50, exit: 0 },
+      height: { enter: 50, update: 40, exit: 50 },
+      duration: { update: 1000, exit: 200 },
+    },
+  ];
+
+  const dataArray = [startData, enterData, updateData];
+
+  let i = 3;
+
+  render('#enter-update-exit-test', enterData);
+
+  setInterval(() => {
+    const index = i % 3;
+    const data = dataArray[index];
+
+    render('#enter-update-exit-test', data);
+
+    i++;
+  }, 2000);
+}
+
+enterUpdateExitTest();
+
+/**
  * Enter Test
  */
 function enterTest() {
@@ -90,6 +136,25 @@ function enterTest() {
       // onTransitionStart: () => {
       //   return 'Start';
       // },
+    },
+    {
+      append: 'rect',
+      x: 51,
+      width: {
+        start: 0,
+        enter: 50,
+        exit: 50,
+      },
+      height: {
+        start: 50,
+        enter: 50,
+        exit: 0,
+      },
+      fill: { start: 'yellow', enter: 'red', exit: 'purple' },
+      delay: 200,
+      // delay: { enter: 200, exit: 0 },
+      duration: { enter: 1000, exit: 500 },
+      ease: { enter: d3.easeBounceOut, exit: d3.easeBounceIn },
     },
   ];
 
