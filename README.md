@@ -384,6 +384,7 @@ const App = () => {
 
 - [ ] Add animated gifs
 - [x] Interactivity example
+- [x] `update` example
 - [ ] `html` example
 - [ ] Nesting with `children` example
 - [ ] Component example
@@ -403,7 +404,7 @@ const App = () => {
 - [x] Enable HTML element appends
 - [x] Add tests
 - [x] Integrate `selection.html()`
-- [ ] Add `update` to `{ enter, exit }` transition object
+- [x] Add `update` to `{ enter, exit }` transition object
 - [x] Consider `start` in transition object
 - [x] Consider `{ enter, exit }` for `ease`, `delay` and `duration`
 - [ ] Design declarative API for complex timeline based animations
