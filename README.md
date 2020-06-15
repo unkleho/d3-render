@@ -4,7 +4,10 @@ Declarative and reusable D3. Replace `select`, `append`, `data`, `join`, `enter`
 
 > Warning, highly experimental at this stage. API will change.
 
-More detail in this article: [Introducing D3 Render: Truly Declarative and Reusable D3](https://observablehq.com/@unkleho/introducing-d3-render-truly-declarative-and-reusable-d3).
+## Articles
+
+- [Introducing D3 Render: Truly Declarative and Reusable D3](https://observablehq.com/@unkleho/introducing-d3-render-truly-declarative-and-reusable-d3).
+- [COVID-19 Bubble Chart Tutorial](https://observablehq.com/@unkleho/covid-19-bubble-chart-with-d3-render)
 
 ## What's the difference?
 
