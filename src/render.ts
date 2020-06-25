@@ -6,9 +6,9 @@ import getNamespace from './getNamespace';
 type ElementDatum = {
   append: string;
   children?: ElementDatum[];
-  duration?: number | Function | object;
-  delay?: number | Function | object;
-  ease?: Function | object;
+  duration?: number | Function | TransitionObject;
+  delay?: number | Function | TransitionObject;
+  ease?: Function | TransitionObject;
   style?: ElementStyles;
   call?: Function;
   [key: string]: ElementValue;
@@ -23,11 +23,12 @@ type ElementStyles = {
 type TransitionState = 'start' | 'enter' | 'update' | 'exit';
 
 // TODO: Causes type errors on style and children
-// type TransitionObject = {
-//   start?: number | string | Function;
-//   enter: number | string | Function;
-//   exit?: number | string | Function;
-// };
+type TransitionObject = {
+  start?: number | string | Function;
+  update?: number | string | Function;
+  enter: number | string | Function;
+  exit?: number | string | Function;
+};
 
 // type Selector = string | Node;
 
