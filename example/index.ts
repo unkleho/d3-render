@@ -294,6 +294,52 @@ function buttonTest() {
 buttonTest();
 
 /**
+ * Marker Test for camel case attribute exceptions
+ */
+function markerTest() {
+  render('#marker-test', [
+    {
+      append: 'defs',
+      children: [
+        {
+          append: 'marker',
+          id: 'marker-start',
+          // Ensure this shows up as
+          // <marker markerWidth="8"> in HTML and so on...
+          markerWidth: 8,
+          markerHeight: 8,
+          refX: 5,
+          refY: 5,
+          children: [
+            {
+              append: 'circle',
+              cx: 5,
+              cy: 5,
+              r: 3,
+              style: {
+                fill: '#000000',
+              },
+            },
+          ],
+        },
+      ],
+    },
+    {
+      append: 'path',
+      d: 'M10,10 L50,10',
+      style: {
+        stroke: '#000',
+        strokeWidth: '1px',
+        fill: 'none',
+        markerStart: 'url(#marker-start)',
+      },
+    },
+  ]);
+}
+
+markerTest();
+
+/**
  * Render Chain Test
  * Check if `render` can accept a D3 selection
  * TODO: In progress
