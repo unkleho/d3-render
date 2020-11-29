@@ -6,9 +6,9 @@ import getNamespace from './getNamespace';
 type ElementDatum = {
   append: string;
   children?: ElementDatum[];
-  duration?: number | Function | object;
-  delay?: number | Function | object;
-  ease?: Function | object;
+  duration?: number | Function | TransitionObject;
+  delay?: number | Function | TransitionObject;
+  ease?: Function | TransitionObject;
   style?: ElementStyles;
   call?: Function;
   [key: string]: ElementValue;
@@ -23,13 +23,17 @@ type ElementStyles = {
 type TransitionState = 'start' | 'enter' | 'update' | 'exit';
 
 // TODO: Causes type errors on style and children
-// type TransitionObject = {
-//   start?: number | string | Function;
-//   enter: number | string | Function;
-//   exit?: number | string | Function;
-// };
+type TransitionObject = {
+  start?: number | string | Function;
+  update?: number | string | Function;
+  enter: number | string | Function;
+  exit?: number | string | Function;
+};
 
 // type Selector = string | Node;
+
+// TODO: Consider incorporating element types from:
+// https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react/index.d.ts
 
 /**
  * Using D3, this function renders elements based on declarative `data`, effectively replacing `select`, `append`, `data`, `join`, `enter`, `exit`, `transition` and more.
@@ -173,7 +177,7 @@ function addAttributes(
 
     // Skip any on* events, we'll handle them in addEvents
     if (!isEvent) {
-      selection.attr(camelToKebab(key), value);
+      selection.attr(keyToAttribute(key), value);
     }
   }
 
@@ -311,6 +315,86 @@ function getValue(value, state: TransitionState): number | string | Function {
  */
 function camelToKebab(string: string): string {
   return string.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1-$2').toLowerCase();
+}
+
+/**
+ * Convert key to HTML attribute. Most keys will change from camel to kebab
+ * case, except for certain SVG attributes.
+ * @param string
+ */
+function keyToAttribute(key: string): string {
+  if (
+    [
+      'allowReorder',
+      'attributeName',
+      'attributeType',
+      'autoReverse',
+      'baseFrequency',
+      'baseProfile',
+      'calcMode',
+      'clipPathUnits',
+      'contentScriptType',
+      'contentStyleType',
+      'diffuseConstant',
+      'edgeMode',
+      'externalResourceRequired',
+      'filterRes',
+      'filterUnits',
+      'glyphRef',
+      'gradientTransform',
+      'gradientUnits',
+      'kernelMatrix',
+      'kernelUnitLength',
+      'keyPoints',
+      'keySplines',
+      'keyTimes',
+      'lengthAdjust',
+      'limitingConeAngle',
+      'markerHeight',
+      'markerUnits',
+      'markerWidth',
+      'maskContentUnits',
+      'maskUnits',
+      'numOctaves',
+      'pathLength',
+      'patternContentUnits',
+      'patternTransform',
+      'patternUnits',
+      'pointsAtX',
+      'pointsAtY',
+      'pointsAtZ',
+      'preserveAlpha',
+      'preserveAspectRatio',
+      'primitiveUnits',
+      'referrerPolicy',
+      'refX',
+      'refY',
+      'repeatCount',
+      'repeatDur',
+      'requiredExtensions',
+      'requiredFeatures',
+      'specularConstant',
+      'specularExponent',
+      'spreadMethod',
+      'startOffset',
+      'stdDeviation',
+      'stitchTiles',
+      'surfaceScale',
+      'systemLanguage',
+      'tableValues',
+      'targetX',
+      'targetY',
+      'textLength',
+      'viewBox',
+      'xChannelSelector',
+      'yChannelSelector',
+      'zoomAndPan',
+    ].includes(key)
+  ) {
+    return key;
+  }
+
+  return camelToKebab(key);
 }
 
 function isEmpty(value) {

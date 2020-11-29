@@ -7,6 +7,7 @@ import {
   // called "queries" which you could import here as well
   // waitFor,
   fireEvent,
+  // queryHelpers,
 } from '@testing-library/dom';
 
 import render from '../src';
@@ -223,6 +224,21 @@ describe('Render', () => {
 
     expect(g).toBeTruthy();
     expect(mockCall).toBeCalledWith({ _groups: [[g]], _parents: [null] });
+  });
+
+  it('should render svg with viewBox attribute instead of view-box', () => {
+    // Ensure certain svg attributes are not converted from camel to kebab case.
+    const div = getExampleDOM('div');
+    const data = [
+      {
+        append: 'svg',
+        viewBox: '0 0 100 100',
+      },
+    ];
+
+    render(div, data);
+    const svg = div.querySelector('svg');
+    expect(svg.getAttribute('viewBox')).toEqual('0 0 100 100');
   });
 });
 
