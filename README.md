@@ -210,7 +210,7 @@ setTimeout(() => {
 }, 2000);
 ```
 
-Behind the scenes, `render` does a lot of heavy lifting for you. It binds your `data`, appends the ellipse and then rebinds the `newData` to trigger an update and transistion. This is the equivalent vanilla D3 code:
+Behind the scenes, `render` does a lot of heavy lifting for you. It binds your `data`, appends the ellipse and then rebinds the `newData` to trigger an update and transition. This is the equivalent vanilla D3 code:
 
 ```js
 const data = [{ fill: 'red' }];
