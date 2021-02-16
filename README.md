@@ -388,8 +388,8 @@ const App = () => {
 - [ ] Add animated gifs
 - [x] Interactivity example
 - [x] `update` example
-- [ ] `html` example
-- [ ] Nesting with `children` example
+- [x] `html` example
+- [x] Nesting with `children` example
 - [ ] Component example
 - [ ] Data `key` example
 - [ ] Selection return example

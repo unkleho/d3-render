@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0] - 2021-02-17
+
+- Update to use D3 v6 and selection/transition to v2. Thanks to @Cgg.
+
 ## [0.2.5] - 2020-11-29
 
 - Add exceptions for camel to kebab case conversions for certain SVG attributes. Eg `markerWidth` and `markerHeight` have to be camel case.
