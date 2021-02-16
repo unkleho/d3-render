@@ -317,9 +317,9 @@ render('#root', [
     cx: 50,
     cy: 50,
     // Circle can call function when it is clicked or tapped
-    onClick: (event, datum, index) => {},
+    onClick: (event, datum) => {},
     // Or when the mouse is over
-    onMouseOver: (event, datum, index) => {},
+    onMouseOver: (event, datum) => {},
   },
 ]);
 ```

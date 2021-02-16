@@ -210,8 +210,8 @@ function addEvents(selection, datum, onPrefix = 'on') {
       if (typeof callback === 'function') {
         const eventName = key.replace(onPrefix, '').toLowerCase();
 
-        selection.on(eventName, function(d, i) {
-          return callback(d3.event, d, i);
+        selection.on(eventName, function(e, d) {
+          return callback(e, d);
         });
       }
     }

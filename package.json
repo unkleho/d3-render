@@ -27,15 +27,15 @@
     "prepare": "tsdx build --format cjs,esm,umd"
   },
   "peerDependencies": {
-    "d3-selection": ">=1.4.0",
-    "d3-transition": ">=1"
+    "d3-selection": ">=2",
+    "d3-transition": ">=2"
   },
   "devDependencies": {
     "@testing-library/dom": "^7.2.2",
-    "@types/d3": "^5.7.2",
-    "d3": "^5.16.0",
+    "@types/d3": "^6.3.0",
+    "d3": "^6.5.0",
     "husky": "^4.2.5",
-    "tsdx": "^0.13.2",
+    "tsdx": "^0.13.3",
     "tslib": "^1.11.1",
     "typescript": "^3.8.3"
   },

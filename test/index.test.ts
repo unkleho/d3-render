@@ -138,8 +138,7 @@ describe('Render', () => {
       }),
       expect.objectContaining({
         append: 'rect',
-      }),
-      0
+      })
     );
   });
 
