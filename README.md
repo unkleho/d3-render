@@ -64,7 +64,7 @@ const selection = render(selector, data);
 
 #### `selector`
 
-A D3 selector string, HTML node or D3 selection to specify the root element where `render` will run. Works like a bit like [d3.select](https://github.com/d3/d3-selection#select). Most common usage is with an id or class.
+A D3 selector string, HTML node or D3 selection to specify the root element where `render` will run. Works a bit like [d3.select](https://github.com/d3/d3-selection#select). Most common usage is with an id or class.
 
 ```js
 // Selects first <svg> element
