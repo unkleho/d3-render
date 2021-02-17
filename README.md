@@ -43,7 +43,7 @@ render('svg', data);
 $ npm install d3-render d3-selection d3-transition
 ```
 
-D3 Render needs `d3-selection` (>=1.4) and `d3-transition` (>=1) as peerDependencies.
+D3 Render needs `d3-selection` (>=2) and `d3-transition` (>=2) as peerDependencies.
 
 ## Documentation
 
