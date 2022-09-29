@@ -33,7 +33,7 @@
   "devDependencies": {
     "@testing-library/dom": "^7.2.2",
     "@types/d3": "^6.3.0",
-    "d3": "^6.5.0",
+    "d3": "^7.6.1",
     "husky": "^4.2.5",
     "tsdx": "^0.13.3",
     "tslib": "^1.11.1",
