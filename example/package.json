@@ -14,7 +14,7 @@
     "react-dom": "^16.13.1"
   },
   "devDependencies": {
-    "parcel": "^1.12.3",
+    "parcel": "^2.8.2",
     "sass": "^1.26.5",
     "typescript": "^3.4.5"
   }
